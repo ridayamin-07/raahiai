@@ -4,6 +4,34 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-raahi-primary: #534AB7;
+  --color-raahi-primary-light: #EEEDFE;
+  --color-raahi-primary-dark: #3C3489;
+  --color-raahi-primary-border: #AFA9EC;
+  --color-raahi-teal: #1D9E75;
+  --color-raahi-teal-light: #E1F5EE;
+  --color-raahi-teal-dark: #085041;
+  --color-raahi-coral: #D85A30;
+  --color-raahi-coral-light: #FAECE7;
+  --color-raahi-amber-light: #FAEEDA;
+  --color-raahi-amber-border: #EF9F27;
+  --color-raahi-amber-dark: #633806;
+  --color-raahi-text: #2C2C2A;
+  --color-raahi-text-muted: #5F5E5A;
+  --color-raahi-bg: #F1EFE8;
+  --color-raahi-border: #D3D1C7;
+  --color-raahi-white: #FFFFFF;
+}
+
+html, body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  background: #F1EFE8;
+  color: #2C2C2A;
+}
+
+
 /*
  * Design system definition.
  *
