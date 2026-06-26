@@ -75,7 +75,7 @@ function Landing() {
             See how it works
           </button>
         </div>
-        <p className="mt-5 text-sm text-[#5F5E5A]">Free · No sign-up · 5 minutes</p>
+        
       </section>
 
       {/* Language strip */}
@@ -181,7 +181,6 @@ function Landing() {
       <section className="bg-[#534AB7]">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-white md:text-4xl">Stop scrolling. Start moving.</h2>
-          <p className="mt-4 text-[#EEEDFE]">5 minutes. Three paths. Your roadmap.</p>
           <Link
             to="/survey"
             className="mt-8 inline-block rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#534AB7] transition hover:bg-[#EEEDFE]"
