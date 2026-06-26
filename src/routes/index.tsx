@@ -55,7 +55,7 @@ function Landing() {
         </span>
         <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-6xl">
           Your Personalised{"\u00a0"}
-          <span className="text-[#534AB7]">Career Mentorship into Tech</span>
+          <span className="block text-[#534AB7]">Career Mentorship into Tech</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-[#5F5E5A]">
           Raahi is an AI mentor that learns who you are, suggests careers that actually fit, and
