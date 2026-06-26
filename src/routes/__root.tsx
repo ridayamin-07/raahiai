@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Raahi.AI — Your personalised roadmap into tech" },
+      { title: "Raahi.AI — Your Personalised Career Mentorship into Tech" },
       {
         name: "description",
         content:
-          "AI career mentorship for non-tech graduates switching into tech. Free, no sign-up, 10 minutes.",
+          "AI career mentorship for non-tech graduates switching into tech. Free, no sign-up, 5 minutes.",
       },
       { property: "og:title", content: "Raahi.AI — Career mentorship for non-tech switchers" },
       {
