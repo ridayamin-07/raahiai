@@ -20,7 +20,7 @@ const QUESTIONS: Q[] = [
   { id: "timePerWeek", type: "single", q: "How much time can you dedicate per week?", options: ["Less than 5 hrs", "5–10 hrs", "10–20 hrs", "20+ hrs"], required: true },
   { id: "learningStyle", type: "multi", q: "How do you learn best?", options: ["Videos", "Reading articles", "Hands-on projects", "Structured plan", "Trial and error", "Having someone explain"], required: true },
   { id: "budget", type: "single", q: "What is your budget?", options: ["Free only", "Up to $20/mo", "$20–50/mo", "$50+/mo"], required: true },
-  { id: "timeline", type: "single", q: "What is your timeline goal?", options: ["1–2 months", "3–6 months", "6–12 months", "No deadline"], required: true },
+  
   { id: "blockers", type: "tags", q: "What has stopped you before?", options: ["Did not know where to start", "Not technical enough", "Can't afford bootcamps", "Overwhelmed by advice", "No network", "Fear of judgment", "Did not know which field", "Just starting"], required: true },
   { id: "skillLevel", type: "single", q: "Have you explored any tech skills?", options: ["Zero experience", "Tried a few things", "Explored seriously", "Have some skills"], required: true },
   { id: "additionalContext", type: "text", q: "Anything else you want us to know?", placeholder: "e.g. I have always been drawn to how apps work...", required: false },
