@@ -3,11 +3,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Raahi.AI — Your personalised roadmap into tech" },
+      { title: "Raahi.AI — Your Personalised Career Mentorship into Tech" },
       {
         name: "description",
         content:
-          "Free AI career mentorship for non-tech graduates switching into tech. No sign-up, 10 minutes.",
+          "Free AI career mentorship for non-tech graduates switching into tech. No sign-up, 5 minutes.",
       },
     ],
   }),
@@ -54,12 +54,12 @@ function Landing() {
           Career guidance for non-tech switchers
         </span>
         <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-6xl">
-          Your personalised{" "}
-          <span className="text-[#534AB7]">roadmap into tech</span>
+          Your Personalised{"\u00a0"}
+          <span className="text-[#534AB7]">Career Mentorship into Tech</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-[#5F5E5A]">
           Raahi is an AI mentor that learns who you are, suggests careers that actually fit, and
-          walks you through it — week by week, in your own language.
+          walks you through it — week by week.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
@@ -75,7 +75,7 @@ function Landing() {
             See how it works
           </button>
         </div>
-        <p className="mt-5 text-sm text-[#5F5E5A]">Free · No sign-up · 10 minutes</p>
+        <p className="mt-5 text-sm text-[#5F5E5A]">Free · No sign-up · 5 minutes</p>
       </section>
 
       {/* Language strip */}
@@ -181,7 +181,7 @@ function Landing() {
       <section className="bg-[#534AB7]">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-white md:text-4xl">Stop scrolling. Start moving.</h2>
-          <p className="mt-4 text-[#EEEDFE]">10 minutes. Three paths. Your roadmap.</p>
+          <p className="mt-4 text-[#EEEDFE]">5 minutes. Three paths. Your roadmap.</p>
           <Link
             to="/survey"
             className="mt-8 inline-block rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#534AB7] transition hover:bg-[#EEEDFE]"
