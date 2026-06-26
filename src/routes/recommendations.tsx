@@ -200,11 +200,6 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
                       </ul>
                     </div>
 
-                    <div className="mt-5 rounded-2xl border border-white/60 bg-white/70 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-[#5F5E5A]">Your first step (free)</p>
-                      <p className="mt-1 text-sm text-[#2C2C2A]">{r.first_step}</p>
-                    </div>
-
                     <div className="mt-5 flex gap-2">
                       <button
                         onClick={() => choose(r)}
