@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-type Body = { systemPrompt?: string; userMessage?: string };
+type Body = { systemPrompt?: string; userMessage?: string; maxTokens?: number };
 
 export const Route = createFileRoute("/api/chat")({
   server: {
