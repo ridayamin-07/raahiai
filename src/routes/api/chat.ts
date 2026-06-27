@@ -15,7 +15,7 @@ export const Route = createFileRoute("/api/chat")({
             headers: { "Content-Type": "application/json" },
           });
         }
-        const { systemPrompt, userMessage } = body;
+        const { systemPrompt, userMessage, maxTokens } = body;
         if (!systemPrompt || !userMessage) {
           return new Response(JSON.stringify({ error: "Missing fields" }), {
             status: 400,
