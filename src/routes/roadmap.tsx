@@ -91,7 +91,7 @@ Return ONLY valid JSON, no prose, no markdown fences. Structure:
   ]
 }
 Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per week, learning style, and skill level.`;
-    const out = await callAI(sys, msg);
+    const out = await callAI(sys, msg, 8000);
     if (out.startsWith("ERROR:")) {
       setError(out);
       setLoading(false);
