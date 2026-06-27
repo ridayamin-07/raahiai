@@ -9,6 +9,8 @@ export type AppState = {
   completedTasks: string[];
   stuckStreak: number;
   executionMode: string;
+  checkedInThisWeek: boolean;
+  checkInResponse: string;
 };
 
 const DEFAULT_STATE: AppState = {
@@ -20,6 +22,8 @@ const DEFAULT_STATE: AppState = {
   completedTasks: [],
   stuckStreak: 0,
   executionMode: "",
+  checkedInThisWeek: false,
+  checkInResponse: "",
 };
 
 type Ctx = {
@@ -49,6 +53,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
       sessionStorage.setItem(KEY, JSON.stringify(state));
     } catch {}
   }, [state, hydrated]);
+
+  // Sync checkedInThisWeek across screens / reset when week increments
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      const stored = sessionStorage.getItem("raahi_checked_in_week");
+      const storedWeek = stored ? parseInt(stored, 10) : NaN;
+      const matches = storedWeek === state.currentWeek;
+      if (matches && !state.checkedInThisWeek) {
+        setState((s) => ({ ...s, checkedInThisWeek: true }));
+      } else if (!matches && state.checkedInThisWeek) {
+        setState((s) => ({ ...s, checkedInThisWeek: false, checkInResponse: "" }));
+      }
+    } catch {}
+  }, [hydrated, state.currentWeek, state.checkedInThisWeek]);
 
   const update = (patch: Partial<AppState>) => setState((s) => ({ ...s, ...patch }));
   const reset = () => setState(DEFAULT_STATE);

@@ -138,6 +138,31 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
     navigate({ to: "/choice" });
   };
 
+  const prevWeekTasks: string[] = (() => {
+    const prev = state.currentWeek - 1;
+    if (prev < 1 || !data) return [];
+    for (const ph of data.phases) {
+      for (const w of ph.weeks) if (w.week === prev) return w.tasks || [];
+    }
+    return [];
+  })();
+
+  const handleCheckIn = (response: string, stuck: boolean) => {
+    try {
+      sessionStorage.setItem("raahi_checked_in_week", String(state.currentWeek));
+    } catch {}
+    update({ checkedInThisWeek: true, checkInResponse: response });
+    if (stuck) {
+      try {
+        sessionStorage.setItem(
+          "raahi_prefill_chat",
+          "I got stuck on last week — can you help me figure out what went wrong?",
+        );
+      } catch {}
+      navigate({ to: "/chat" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F1EFE8] pb-20">
       <header className="sticky top-0 z-30 border-b border-[#D3D1C7] bg-[#F1EFE8]/95 backdrop-blur">
@@ -181,6 +206,46 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
 
         {!loading && !error && data && (
           <>
+            {!state.checkedInThisWeek && prevWeekTasks.length > 0 && (
+              <div
+                className="mt-8"
+                style={{
+                  background: "#FAEEDA",
+                  border: "0.5px solid #EF9F27",
+                  borderRadius: 12,
+                  padding: "14px 18px",
+                }}
+              >
+                <p className="font-bold" style={{ color: "#633806" }}>
+                  Week {state.currentWeek} check-in
+                </p>
+                <p className="mt-1 text-sm" style={{ color: "#854F0B" }}>
+                  Last week you were supposed to complete: {prevWeekTasks.join(", ")}. How did it go?
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => handleCheckIn("Done it all", false)}
+                    className="rounded-full px-4 py-1.5 text-xs font-semibold text-white"
+                    style={{ background: "#534AB7" }}
+                  >
+                    Done it all
+                  </button>
+                  <button
+                    onClick={() => handleCheckIn("Partially done", false)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Partially done
+                  </button>
+                  <button
+                    onClick={() => handleCheckIn("Got stuck", true)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Got stuck
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="mt-8 rounded-2xl border border-[#D3D1C7] bg-white p-5">
               <div className="flex justify-between text-sm">
                 <span className="font-semibold">Week {state.currentWeek} of {totalWeeks}</span>

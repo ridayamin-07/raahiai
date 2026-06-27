@@ -29,10 +29,20 @@ function Chat() {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [mode, setMode] = useState("mentorship");
+  const [showCheckIn, setShowCheckIn] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const p = state.userProfile || {};
   const totalWeeks = totalWeeksFromRoadmap(state.roadmap);
+
+  const prevWeekTasks: string[] = (() => {
+    const prev = state.currentWeek - 1;
+    if (prev < 1 || !state.roadmap?.phases) return [];
+    for (const ph of state.roadmap.phases) {
+      for (const w of ph.weeks || []) if (w.week === prev) return w.tasks || [];
+    }
+    return [];
+  })();
 
   useEffect(() => {
     if (!state.careerPath) {
@@ -44,26 +54,24 @@ function Chat() {
       content: `Hey. So — ${p.background || "you"} background, going for ${state.careerPath}. I've got your plan in front of me. We're on week ${state.currentWeek} of ${totalWeeks}.\n\nTell me what's going on, or pick one of the buttons below. Type in any language — I'll match you.`,
     };
 
-    const checkinKey = `raahi.checkin.w${state.currentWeek}`;
-    const seen = typeof window !== "undefined" && sessionStorage.getItem(checkinKey);
+    setMessages([welcome]);
 
-    const initial: Msg[] = [];
-    if (!seen) {
-      // Find this week's tasks
-      let tasks: string[] = [];
-      state.roadmap?.phases?.forEach((ph: any) =>
-        ph.weeks?.forEach((w: any) => { if (w.week === state.currentWeek) tasks = w.tasks || []; })
-      );
-      initial.push({
-        role: "system-card",
-        content: JSON.stringify({ week: state.currentWeek, tasks }),
-      });
-      if (typeof window !== "undefined") sessionStorage.setItem(checkinKey, "1");
+    // Show check-in bubble only if not yet checked in this week and there's a prior week
+    if (!state.checkedInThisWeek && prevWeekTasks.length > 0) {
+      setShowCheckIn(true);
     }
-    initial.push(welcome);
-    setMessages(initial);
+
+    // Handle prefill from roadmap "Got stuck" navigation
+    try {
+      const prefill = sessionStorage.getItem("raahi_prefill_chat");
+      if (prefill) {
+        setInput(prefill);
+        sessionStorage.removeItem("raahi_prefill_chat");
+      }
+    } catch {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -94,16 +102,31 @@ function Chat() {
     send(e.prompt(state.currentWeek), e.mode);
   };
 
-  const handleCheckin = (status: "done" | "partial" | "stuck") => {
-    setMessages((m) => m.filter((x) => x.role !== "system-card"));
-    if (status === "stuck") update({ stuckStreak: (state.stuckStreak || 0) + 1 });
-    else update({ stuckStreak: 0 });
-    const label =
-      status === "done" ? "I finished everything for this week." :
-      status === "partial" ? "I did some of it, not all." :
-      "I got stuck and didn't make progress.";
-    send(label, "weekly-checkin");
+  const handleCheckin = async (response: string, stuck: boolean) => {
+    try {
+      sessionStorage.setItem("raahi_checked_in_week", String(state.currentWeek));
+    } catch {}
+    update({
+      checkedInThisWeek: true,
+      checkInResponse: response,
+      stuckStreak: stuck ? (state.stuckStreak || 0) + 1 : 0,
+    });
+    setShowCheckIn(false);
+
+    setSending(true);
+    setMode("checkin_mode");
+    const sys = buildSystemPrompt(
+      { ...state, checkedInThisWeek: true, checkInResponse: response },
+      "checkin_mode",
+    );
+    const userMsg = `Weekly check-in. Last week's tasks were: ${
+      prevWeekTasks.join(", ") || "(none recorded)"
+    }. The user's response: "${response}". Acknowledge their status warmly, reference their specific tasks, and suggest the next concrete step for this week.`;
+    const out = await callAI(sys, userMsg);
+    setMessages((m) => [...m, { role: "assistant", content: out }]);
+    setSending(false);
   };
+
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F1EFE8]">
@@ -141,28 +164,40 @@ function Chat() {
 
       <div ref={scrollRef} className="mx-auto w-full max-w-3xl flex-1 overflow-y-auto px-4 py-6">
         <div className="space-y-4">
-          {messages.map((m, i) => {
-            if (m.role === "system-card") {
-              const parsed = JSON.parse(m.content);
-              return (
-                <div key={i} className="rounded-2xl border border-[#EF9F27] bg-[#FAEEDA] p-5">
-                  <p className="font-semibold text-[#633806]">Week {parsed.week} check-in</p>
-                  <p className="mt-1 text-sm text-[#633806]">
-                    You were supposed to complete{" "}
-                    {parsed.tasks?.length
-                      ? `"${parsed.tasks.slice(0, 3).join(", ")}"`
-                      : "your week's tasks"}{" "}
-                    this week. How did it go?
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <button onClick={() => handleCheckin("done")} className="rounded-full bg-[#1D9E75] px-4 py-1.5 text-xs font-semibold text-white">Done it all</button>
-                    <button onClick={() => handleCheckin("partial")} className="rounded-full bg-[#EF9F27] px-4 py-1.5 text-xs font-semibold text-white">Partially done</button>
-                    <button onClick={() => handleCheckin("stuck")} className="rounded-full bg-[#D85A30] px-4 py-1.5 text-xs font-semibold text-white">Got stuck</button>
-                  </div>
+          {showCheckIn && (
+            <div className="flex justify-start">
+              <div className="max-w-[85%] rounded-2xl border border-[#D3D1C7] bg-white px-4 py-3 text-sm leading-relaxed text-[#2C2C2A]">
+                <p>
+                  Before we dive in — last week you were working on{" "}
+                  {prevWeekTasks.join(", ")}. How did it go?
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => handleCheckin("Done it all", false)}
+                    className="rounded-full px-4 py-1.5 text-xs font-semibold text-white"
+                    style={{ background: "#534AB7" }}
+                  >
+                    Done it all
+                  </button>
+                  <button
+                    onClick={() => handleCheckin("Partially done", false)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Partially done
+                  </button>
+                  <button
+                    onClick={() => handleCheckin("Got stuck", true)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Got stuck
+                  </button>
                 </div>
-              );
-            }
+              </div>
+            </div>
+          )}
+          {messages.map((m, i) => {
             const isUser = m.role === "user";
+
             return (
               <div key={i} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
                 <div
