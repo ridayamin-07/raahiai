@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-type Body = { systemPrompt?: string; userMessage?: string };
+type Body = { systemPrompt?: string; userMessage?: string; maxTokens?: number };
 
 export const Route = createFileRoute("/api/chat")({
   server: {
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/api/chat")({
             headers: { "Content-Type": "application/json" },
           });
         }
-        const { systemPrompt, userMessage } = body;
+        const { systemPrompt, userMessage, maxTokens } = body;
         if (!systemPrompt || !userMessage) {
           return new Response(JSON.stringify({ error: "Missing fields" }), {
             status: 400,
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/chat")({
             },
             body: JSON.stringify({
               model: "google/gemini-2.5-flash",
-              max_tokens: 2000,
+              max_tokens: typeof maxTokens === "number" ? maxTokens : 2000,
               temperature: 0.7,
               messages: [
                 { role: "system", content: systemPrompt },

@@ -1,11 +1,15 @@
 import type { AppState } from "@/context/AppContext";
 
-export async function callAI(systemPrompt: string, userMessage: string): Promise<string> {
+export async function callAI(
+  systemPrompt: string,
+  userMessage: string,
+  maxTokens?: number,
+): Promise<string> {
   try {
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ systemPrompt, userMessage }),
+      body: JSON.stringify({ systemPrompt, userMessage, maxTokens }),
     });
     if (!res.ok) return "ERROR: Could not reach AI. Please try again.";
     const data = await res.json();

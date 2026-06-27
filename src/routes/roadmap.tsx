@@ -22,16 +22,38 @@ type Phase = {
 type RoadmapData = { duration_months: number; phases: Phase[] };
 
 function parseRoadmap(text: string): RoadmapData | null {
-  const fenced = text.match(/```(?:json)?\s*([\s\S]+?)```/i);
-  const raw = fenced ? fenced[1] : text;
+  let raw = text.trim();
+  const fenced = raw.match(/```(?:json)?\s*([\s\S]+?)```/i);
+  if (fenced) raw = fenced[1];
   const s = raw.indexOf("{");
-  const e = raw.lastIndexOf("}");
-  if (s === -1 || e === -1) return null;
-  try {
-    return JSON.parse(raw.slice(s, e + 1));
-  } catch {
-    return null;
-  }
+  if (s === -1) return null;
+  let candidate = raw.slice(s);
+  const e = candidate.lastIndexOf("}");
+  if (e !== -1) candidate = candidate.slice(0, e + 1);
+  const tryParse = (str: string): RoadmapData | null => {
+    try {
+      return JSON.parse(str);
+    } catch {
+      return null;
+    }
+  };
+  let parsed = tryParse(candidate);
+  if (parsed) return parsed;
+  // Repair: strip trailing commas and control chars
+  const repaired = candidate
+    .replace(/,\s*([}\]])/g, "$1")
+    .replace(/[\x00-\x09\x0B\x0C\x0E-\x1F]/g, "");
+  parsed = tryParse(repaired);
+  if (parsed) return parsed;
+  // Last resort: balance braces/brackets if truncated
+  const openC = (repaired.match(/{/g) || []).length;
+  const closeC = (repaired.match(/}/g) || []).length;
+  const openB = (repaired.match(/\[/g) || []).length;
+  const closeB = (repaired.match(/\]/g) || []).length;
+  let balanced = repaired.replace(/,\s*$/, "");
+  balanced += "]".repeat(Math.max(0, openB - closeB));
+  balanced += "}".repeat(Math.max(0, openC - closeC));
+  return tryParse(balanced);
 }
 
 function Roadmap() {
@@ -69,7 +91,7 @@ Return ONLY valid JSON, no prose, no markdown fences. Structure:
   ]
 }
 Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per week, learning style, and skill level.`;
-    const out = await callAI(sys, msg);
+    const out = await callAI(sys, msg, 8000);
     if (out.startsWith("ERROR:")) {
       setError(out);
       setLoading(false);
