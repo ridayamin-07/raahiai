@@ -50,10 +50,7 @@ function Landing() {
 
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 pt-20 pb-12 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#AFA9EC] bg-[#EEEDFE] px-4 py-1.5 text-xs font-medium text-[#3C3489]">
-          Career guidance for non-tech switchers
-        </span>
-        <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-6xl">
+        <h1 className="text-5xl font-extrabold tracking-tight md:text-6xl">
           Your Personalised{"\u00a0"}
           <span className="block text-[#534AB7]">Tech Career Mentorship{"\u00a0"}</span>
         </h1>
