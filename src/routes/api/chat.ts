@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/chat")({
             },
             body: JSON.stringify({
               model: "google/gemini-2.5-flash",
-              max_tokens: 2000,
+              max_tokens: typeof maxTokens === "number" ? maxTokens : 2000,
               temperature: 0.7,
               messages: [
                 { role: "system", content: systemPrompt },
