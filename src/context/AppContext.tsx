@@ -9,6 +9,8 @@ export type AppState = {
   completedTasks: string[];
   stuckStreak: number;
   executionMode: string;
+  checkedInThisWeek: boolean;
+  checkInResponse: string;
 };
 
 const DEFAULT_STATE: AppState = {
@@ -20,6 +22,8 @@ const DEFAULT_STATE: AppState = {
   completedTasks: [],
   stuckStreak: 0,
   executionMode: "",
+  checkedInThisWeek: false,
+  checkInResponse: "",
 };
 
 type Ctx = {
