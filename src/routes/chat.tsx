@@ -102,16 +102,31 @@ function Chat() {
     send(e.prompt(state.currentWeek), e.mode);
   };
 
-  const handleCheckin = (status: "done" | "partial" | "stuck") => {
-    setMessages((m) => m.filter((x) => x.role !== "system-card"));
-    if (status === "stuck") update({ stuckStreak: (state.stuckStreak || 0) + 1 });
-    else update({ stuckStreak: 0 });
-    const label =
-      status === "done" ? "I finished everything for this week." :
-      status === "partial" ? "I did some of it, not all." :
-      "I got stuck and didn't make progress.";
-    send(label, "weekly-checkin");
+  const handleCheckin = async (response: string, stuck: boolean) => {
+    try {
+      sessionStorage.setItem("raahi_checked_in_week", String(state.currentWeek));
+    } catch {}
+    update({
+      checkedInThisWeek: true,
+      checkInResponse: response,
+      stuckStreak: stuck ? (state.stuckStreak || 0) + 1 : 0,
+    });
+    setShowCheckIn(false);
+
+    setSending(true);
+    setMode("checkin_mode");
+    const sys = buildSystemPrompt(
+      { ...state, checkedInThisWeek: true, checkInResponse: response },
+      "checkin_mode",
+    );
+    const userMsg = `Weekly check-in. Last week's tasks were: ${
+      prevWeekTasks.join(", ") || "(none recorded)"
+    }. The user's response: "${response}". Acknowledge their status warmly, reference their specific tasks, and suggest the next concrete step for this week.`;
+    const out = await callAI(sys, userMsg);
+    setMessages((m) => [...m, { role: "assistant", content: out }]);
+    setSending(false);
   };
+
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F1EFE8]">
