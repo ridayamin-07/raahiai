@@ -164,28 +164,40 @@ function Chat() {
 
       <div ref={scrollRef} className="mx-auto w-full max-w-3xl flex-1 overflow-y-auto px-4 py-6">
         <div className="space-y-4">
-          {messages.map((m, i) => {
-            if (m.role === "system-card") {
-              const parsed = JSON.parse(m.content);
-              return (
-                <div key={i} className="rounded-2xl border border-[#EF9F27] bg-[#FAEEDA] p-5">
-                  <p className="font-semibold text-[#633806]">Week {parsed.week} check-in</p>
-                  <p className="mt-1 text-sm text-[#633806]">
-                    You were supposed to complete{" "}
-                    {parsed.tasks?.length
-                      ? `"${parsed.tasks.slice(0, 3).join(", ")}"`
-                      : "your week's tasks"}{" "}
-                    this week. How did it go?
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <button onClick={() => handleCheckin("done")} className="rounded-full bg-[#1D9E75] px-4 py-1.5 text-xs font-semibold text-white">Done it all</button>
-                    <button onClick={() => handleCheckin("partial")} className="rounded-full bg-[#EF9F27] px-4 py-1.5 text-xs font-semibold text-white">Partially done</button>
-                    <button onClick={() => handleCheckin("stuck")} className="rounded-full bg-[#D85A30] px-4 py-1.5 text-xs font-semibold text-white">Got stuck</button>
-                  </div>
+          {showCheckIn && (
+            <div className="flex justify-start">
+              <div className="max-w-[85%] rounded-2xl border border-[#D3D1C7] bg-white px-4 py-3 text-sm leading-relaxed text-[#2C2C2A]">
+                <p>
+                  Before we dive in — last week you were working on{" "}
+                  {prevWeekTasks.join(", ")}. How did it go?
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => handleCheckin("Done it all", false)}
+                    className="rounded-full px-4 py-1.5 text-xs font-semibold text-white"
+                    style={{ background: "#534AB7" }}
+                  >
+                    Done it all
+                  </button>
+                  <button
+                    onClick={() => handleCheckin("Partially done", false)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Partially done
+                  </button>
+                  <button
+                    onClick={() => handleCheckin("Got stuck", true)}
+                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                  >
+                    Got stuck
+                  </button>
                 </div>
-              );
-            }
+              </div>
+            </div>
+          )}
+          {messages.map((m, i) => {
             const isUser = m.role === "user";
+
             return (
               <div key={i} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
                 <div
