@@ -138,6 +138,31 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
     navigate({ to: "/choice" });
   };
 
+  const prevWeekTasks: string[] = (() => {
+    const prev = state.currentWeek - 1;
+    if (prev < 1 || !data) return [];
+    for (const ph of data.phases) {
+      for (const w of ph.weeks) if (w.week === prev) return w.tasks || [];
+    }
+    return [];
+  })();
+
+  const handleCheckIn = (response: string, stuck: boolean) => {
+    try {
+      sessionStorage.setItem("raahi_checked_in_week", String(state.currentWeek));
+    } catch {}
+    update({ checkedInThisWeek: true, checkInResponse: response });
+    if (stuck) {
+      try {
+        sessionStorage.setItem(
+          "raahi_prefill_chat",
+          "I got stuck on last week — can you help me figure out what went wrong?",
+        );
+      } catch {}
+      navigate({ to: "/chat" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F1EFE8] pb-20">
       <header className="sticky top-0 z-30 border-b border-[#D3D1C7] bg-[#F1EFE8]/95 backdrop-blur">
