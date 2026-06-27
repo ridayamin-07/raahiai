@@ -29,10 +29,20 @@ function Chat() {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [mode, setMode] = useState("mentorship");
+  const [showCheckIn, setShowCheckIn] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const p = state.userProfile || {};
   const totalWeeks = totalWeeksFromRoadmap(state.roadmap);
+
+  const prevWeekTasks: string[] = (() => {
+    const prev = state.currentWeek - 1;
+    if (prev < 1 || !state.roadmap?.phases) return [];
+    for (const ph of state.roadmap.phases) {
+      for (const w of ph.weeks || []) if (w.week === prev) return w.tasks || [];
+    }
+    return [];
+  })();
 
   useEffect(() => {
     if (!state.careerPath) {
@@ -44,26 +54,24 @@ function Chat() {
       content: `Hey. So — ${p.background || "you"} background, going for ${state.careerPath}. I've got your plan in front of me. We're on week ${state.currentWeek} of ${totalWeeks}.\n\nTell me what's going on, or pick one of the buttons below. Type in any language — I'll match you.`,
     };
 
-    const checkinKey = `raahi.checkin.w${state.currentWeek}`;
-    const seen = typeof window !== "undefined" && sessionStorage.getItem(checkinKey);
+    setMessages([welcome]);
 
-    const initial: Msg[] = [];
-    if (!seen) {
-      // Find this week's tasks
-      let tasks: string[] = [];
-      state.roadmap?.phases?.forEach((ph: any) =>
-        ph.weeks?.forEach((w: any) => { if (w.week === state.currentWeek) tasks = w.tasks || []; })
-      );
-      initial.push({
-        role: "system-card",
-        content: JSON.stringify({ week: state.currentWeek, tasks }),
-      });
-      if (typeof window !== "undefined") sessionStorage.setItem(checkinKey, "1");
+    // Show check-in bubble only if not yet checked in this week and there's a prior week
+    if (!state.checkedInThisWeek && prevWeekTasks.length > 0) {
+      setShowCheckIn(true);
     }
-    initial.push(welcome);
-    setMessages(initial);
+
+    // Handle prefill from roadmap "Got stuck" navigation
+    try {
+      const prefill = sessionStorage.getItem("raahi_prefill_chat");
+      if (prefill) {
+        setInput(prefill);
+        sessionStorage.removeItem("raahi_prefill_chat");
+      }
+    } catch {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
