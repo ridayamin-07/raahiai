@@ -130,7 +130,22 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
   const toggleTask = (id: string) => {
     const next = completed.includes(id) ? completed.filter((c) => c !== id) : [...completed, id];
     setCompleted(next);
-    update({ completedTasks: next });
+
+    // Recompute currentWeek: highest week where all tasks done, +1 (capped at totalWeeks)
+    let newCurrentWeek = state.currentWeek;
+    if (data) {
+      const allWeeks = data.phases.flatMap((p, pi) =>
+        p.weeks.map((w) => ({ w, key: `p${pi}w${w.week}` })),
+      );
+      const totalW = allWeeks.length;
+      let furthestComplete = 0;
+      for (const { w, key } of allWeeks) {
+        const allDone = w.tasks.every((_, ti) => next.includes(`${key}t${ti}`));
+        if (allDone) furthestComplete = Math.max(furthestComplete, w.week);
+      }
+      newCurrentWeek = Math.min(totalW, Math.max(1, furthestComplete + 1));
+    }
+    update({ completedTasks: next, currentWeek: newCurrentWeek });
   };
 
   const pickMode = (mode: string) => {
