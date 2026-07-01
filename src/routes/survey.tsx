@@ -109,7 +109,7 @@ function Survey() {
           {q.type === "single" && (
             <div className="grid gap-3">
               {q.options.map((opt) => {
-                const active = value === opt;
+                const active = value === opt || (opt === "Something else" && isCustomBg);
                 return (
                   <button
                     key={opt}
@@ -124,6 +124,16 @@ function Survey() {
                   </button>
                 );
               })}
+              {q.id === "background" && isCustomBg && (
+                <input
+                  type="text"
+                  value={value === "Something else" ? "" : value || ""}
+                  onChange={(e) => setVal(e.target.value)}
+                  placeholder="Please specify your educational background..."
+                  className="rounded-xl border border-[#534AB7] bg-white px-5 py-4 text-[#2C2C2A] placeholder:text-[#5F5E5A] focus:border-[#534AB7] focus:outline-none"
+                  autoFocus
+                />
+              )}
             </div>
           )}
 
