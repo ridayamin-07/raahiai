@@ -84,13 +84,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "AI career mentorship for non-tech graduates switching into tech. Free, no sign-up, 5 minutes.",
       },
-      { property: "og:title", content: "Raahi.AI — Career mentorship for non-tech switchers" },
+      { property: "og:title", content: "Raahi.AI — Your Personalised Career Mentorship into Tech" },
       {
         property: "og:description",
         content: "Get a personalised roadmap into tech with an AI mentor that already knows you.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Raahi.AI — Your Personalised Career Mentorship into Tech" },
+      { name: "description", content: "Raahi.AI is an AI-powered web app guiding non-tech graduates into tech careers." },
+      { property: "og:description", content: "Raahi.AI is an AI-powered web app guiding non-tech graduates into tech careers." },
+      { name: "twitter:description", content: "Raahi.AI is an AI-powered web app guiding non-tech graduates into tech careers." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/820eabf5-c17e-4346-b577-ea1e897e3c6c/id-preview-30ddb385--1e3538e9-5f1a-4524-bbbb-dc8885c594f8.lovable.app-1782910079902.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/820eabf5-c17e-4346-b577-ea1e897e3c6c/id-preview-30ddb385--1e3538e9-5f1a-4524-bbbb-dc8885c594f8.lovable.app-1782910079902.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
