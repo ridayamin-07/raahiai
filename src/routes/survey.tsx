@@ -37,8 +37,11 @@ function Survey() {
   const progress = ((step + 1) / QUESTIONS.length) * 100;
 
   const value = profile[q.id];
+  const standardBgOptions = QUESTIONS[0].options.slice(0, -1);
+  const isCustomBg = q.id === "background" && !!value && !standardBgOptions.includes(value);
   const isAnswered = () => {
     if (!q.required) return true;
+    if (q.id === "background") return !!value && String(value).trim().length > 0 && value !== "Something else";
     if (q.type === "single" || q.type === "text") return !!value && String(value).trim().length > 0;
     return Array.isArray(value) && value.length > 0;
   };
