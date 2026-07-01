@@ -37,8 +37,11 @@ function Survey() {
   const progress = ((step + 1) / QUESTIONS.length) * 100;
 
   const value = profile[q.id];
+  const standardBgOptions = (QUESTIONS[0] as Extract<Q, { type: "single" }>).options.slice(0, -1);
+  const isCustomBg = q.id === "background" && !!value && !standardBgOptions.includes(value);
   const isAnswered = () => {
     if (!q.required) return true;
+    if (q.id === "background") return !!value && String(value).trim().length > 0 && value !== "Something else";
     if (q.type === "single" || q.type === "text") return !!value && String(value).trim().length > 0;
     return Array.isArray(value) && value.length > 0;
   };
@@ -106,7 +109,7 @@ function Survey() {
           {q.type === "single" && (
             <div className="grid gap-3">
               {q.options.map((opt) => {
-                const active = value === opt;
+                const active = value === opt || (opt === "Something else" && isCustomBg);
                 return (
                   <button
                     key={opt}
@@ -121,6 +124,16 @@ function Survey() {
                   </button>
                 );
               })}
+              {q.id === "background" && isCustomBg && (
+                <input
+                  type="text"
+                  value={value === "Something else" ? "" : value || ""}
+                  onChange={(e) => setVal(e.target.value)}
+                  placeholder="Please specify your educational background..."
+                  className="rounded-xl border border-[#534AB7] bg-white px-5 py-4 text-[#2C2C2A] placeholder:text-[#5F5E5A] focus:border-[#534AB7] focus:outline-none"
+                  autoFocus
+                />
+              )}
             </div>
           )}
 
