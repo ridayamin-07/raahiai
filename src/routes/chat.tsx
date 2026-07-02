@@ -138,6 +138,8 @@ function Chat() {
   };
 
 
+  if (!ready || !session) return null;
+
   return (
     <div className="flex min-h-screen flex-col bg-[#F1EFE8]">
       <header className="sticky top-0 z-30 border-b border-[#D3D1C7] bg-white">
