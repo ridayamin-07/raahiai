@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useApp } from "@/context/AppContext";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 
 export const Route = createFileRoute("/choice")({
   head: () => ({ meta: [{ title: "Choose how you walk · Raahi.AI" }] }),
@@ -8,9 +9,11 @@ export const Route = createFileRoute("/choice")({
 });
 
 function Choice() {
+  const { ready, session } = useAuthGuard();
   const { state, update } = useApp();
   const navigate = useNavigate();
   const [picked, setPicked] = useState<string>(state.executionMode || "");
+  if (!ready || !session) return null;
 
   const pick = (mode: string) => {
     setPicked(mode);

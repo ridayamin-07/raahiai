@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useApp } from "@/context/AppContext";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { buildSystemPrompt, callAI } from "@/utils/ai";
 
 export const Route = createFileRoute("/roadmap")({
@@ -57,15 +58,29 @@ function parseRoadmap(text: string): RoadmapData | null {
 }
 
 function Roadmap() {
+  const { ready, session } = useAuthGuard();
   const { state, update } = useApp();
   const navigate = useNavigate();
   const [months, setMonths] = useState(3);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!state.roadmap);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<RoadmapData | null>(state.roadmap);
   const [openPhase, setOpenPhase] = useState<number>(0);
   const [showDaily, setShowDaily] = useState<Record<string, boolean>>({});
   const [completed, setCompleted] = useState<string[]>(state.completedTasks || []);
+
+  // Sync local mirror when global state hydrates (e.g. from DB after login).
+  useEffect(() => {
+    if (state.roadmap && state.roadmap !== data) {
+      setData(state.roadmap);
+      setLoading(false);
+    }
+    if (state.completedTasks && state.completedTasks.length !== completed.length) {
+      setCompleted(state.completedTasks);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.roadmap, state.completedTasks]);
+
 
   const fetchRoadmap = async (m: number) => {
     setLoading(true);
@@ -109,13 +124,14 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
   };
 
   useEffect(() => {
+    if (!ready || !session) return;
     if (!state.careerPath) {
       navigate({ to: "/recommendations" });
       return;
     }
-    fetchRoadmap(months);
+    if (!state.roadmap) fetchRoadmap(months);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ready, session]);
 
   const switchMonths = (m: number) => {
     if (m === months) return;
@@ -177,6 +193,8 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
       navigate({ to: "/chat" });
     }
   };
+
+  if (!ready || !session) return null;
 
   return (
     <div className="min-h-screen bg-[#F1EFE8] pb-20">

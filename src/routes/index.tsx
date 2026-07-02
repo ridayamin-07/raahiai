@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useApp } from "@/context/AppContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,10 +24,13 @@ function Logo() {
 }
 
 function Landing() {
+  const { session, signOut } = useApp();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     el?.scrollIntoView({ behavior: "smooth" });
   };
+  const primaryHref = session ? "/roadmap" : "/survey";
+  const primaryLabel = session ? "Continue my roadmap →" : "Find my path →";
 
   return (
     <div className="min-h-screen bg-[#F1EFE8] text-[#2C2C2A]">
@@ -39,12 +43,22 @@ function Landing() {
             <button onClick={() => scrollTo("who")} className="hover:text-[#2C2C2A]">Who it's for</button>
             <button onClick={() => scrollTo("proof")} className="hover:text-[#2C2C2A]">Stories</button>
           </nav>
-          <Link
-            to="/survey"
-            className="rounded-full bg-[#534AB7] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3C3489]"
-          >
-            Start for free
-          </Link>
+          {session ? (
+            <div className="flex items-center gap-2">
+              <Link to="/roadmap" className="text-sm font-semibold text-[#534AB7] hover:underline">My roadmap</Link>
+              <button onClick={() => signOut()} className="rounded-full border border-[#D3D1C7] bg-white px-4 py-2 text-sm font-semibold text-[#2C2C2A]">Sign out</button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link to="/auth" className="text-sm font-semibold text-[#5F5E5A] hover:text-[#2C2C2A]">Sign in</Link>
+              <Link
+                to="/survey"
+                className="rounded-full bg-[#534AB7] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3C3489]"
+              >
+                Start for free
+              </Link>
+            </div>
+          )}
         </div>
       </header>
 
@@ -60,10 +74,10 @@ function Landing() {
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
-            to="/survey"
+            to={primaryHref}
             className="rounded-full bg-[#534AB7] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#3C3489]"
           >
-            Find my path →
+            {primaryLabel}
           </Link>
           <button
             onClick={() => scrollTo("how-it-works")}

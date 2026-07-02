@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useApp } from "@/context/AppContext";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 
 export const Route = createFileRoute("/survey")({
   head: () => ({ meta: [{ title: "Tell us about you · Raahi.AI" }] }),
@@ -27,11 +28,13 @@ const QUESTIONS: Q[] = [
 ];
 
 function Survey() {
+  const { ready, session } = useAuthGuard();
   const { state, update } = useApp();
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [profile, setProfile] = useState<Record<string, any>>(state.userProfile || {});
   const navigate = useNavigate();
+  if (!ready || !session) return null;
 
   const q = QUESTIONS[step];
   const progress = ((step + 1) / QUESTIONS.length) * 100;

@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useApp } from "@/context/AppContext";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { buildSystemPrompt, callAI } from "@/utils/ai";
 
 export const Route = createFileRoute("/recommendations")({
@@ -37,6 +38,7 @@ function tryParseJson(text: string): Rec[] | null {
 }
 
 function Recommendations() {
+  const { ready, session } = useAuthGuard();
   const { state, update } = useApp();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -79,13 +81,14 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
   };
 
   useEffect(() => {
+    if (!ready || !session) return;
     if (!state.userProfile?.background) {
       navigate({ to: "/survey" });
       return;
     }
     fetchRecs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ready, session]);
 
   const reject = (path: string) => {
     setRejectedNow((arr) => [...arr, path]);
@@ -108,6 +111,8 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
   };
 
   const p = state.userProfile || {};
+
+  if (!ready || !session) return null;
 
   return (
     <div className="min-h-screen bg-[#F1EFE8] pb-20">
