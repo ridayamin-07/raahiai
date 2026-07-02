@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useApp } from "@/context/AppContext";
-import { buildSystemPrompt, callAI } from "@/utils/ai";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
+import { buildSystemPrompt, callAI, refreshChatSummary } from "@/utils/ai";
 
 export const Route = createFileRoute("/chat")({
   head: () => ({ meta: [{ title: "Chat with Raahi · Raahi.AI" }] }),
@@ -23,6 +24,7 @@ function totalWeeksFromRoadmap(rm: any): number {
 }
 
 function Chat() {
+  const { ready, session } = useAuthGuard();
   const { state, update } = useApp();
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -96,6 +98,14 @@ function Chat() {
     const out = await callAI(sys, historyText);
     setMessages((m) => [...m, { role: "assistant", content: out }]);
     setSending(false);
+    // Fire-and-forget: keep a rolling mentorship summary fresh in DB.
+    if (!out.startsWith("ERROR:")) {
+      refreshChatSummary(state.chatSummary || "", { user: text, assistant: out })
+        .then((next) => {
+          if (next && next !== state.chatSummary) update({ chatSummary: next });
+        })
+        .catch(() => {});
+    }
   };
 
   const handleEntry = (e: typeof ENTRY_BUTTONS[number]) => {
