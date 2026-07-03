@@ -117,7 +117,7 @@ function AuthPage() {
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 w-full rounded-lg border border-[#D3D1C7] bg-white px-3 py-2.5 text-sm focus:border-[#534AB7] focus:outline-none"
               required
-              minLength={6}
+              minLength={8}
             />
           </label>
 
