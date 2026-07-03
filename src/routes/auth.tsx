@@ -31,8 +31,8 @@ function AuthPage() {
     e.preventDefault();
     setErr(null);
     setMsg(null);
-    if (!email.trim() || password.length < 6) {
-      setErr("Enter your email and a password (6+ characters).");
+    if (!email.trim() || password.length < 8) {
+      setErr("Enter your email and a password (8+ characters, avoid common ones).");
       return;
     }
     setBusy(true);
