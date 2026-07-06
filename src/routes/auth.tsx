@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Sign in · Raahi.AI" }] }),
@@ -97,7 +98,41 @@ function AuthPage() {
           </button>
         </div>
 
-        <form onSubmit={submit} className="mt-6 space-y-4">
+        <button
+          type="button"
+          onClick={async () => {
+            setErr(null);
+            setBusy(true);
+            const result = await lovable.auth.signInWithOAuth("google", {
+              redirect_uri: window.location.origin,
+            });
+            if (result.error) {
+              setErr(result.error.message || "Could not sign in with Google.");
+              setBusy(false);
+              return;
+            }
+            if (result.redirected) return; // browser navigates away
+            navigate({ to: (redirect as any) || "/survey" });
+          }}
+          disabled={busy}
+          className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[#D3D1C7] bg-white px-5 py-3 text-sm font-semibold text-[#2C2C2A] shadow-sm transition hover:bg-[#F1EFE8] disabled:opacity-40"
+        >
+          <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.3 29.4 35.5 24 35.5c-6.4 0-11.5-5.2-11.5-11.5S17.6 12.5 24 12.5c2.9 0 5.6 1.1 7.6 2.9l5.7-5.7C33.9 6.5 29.2 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.4-.3-3.5z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.7 19 12.5 24 12.5c2.9 0 5.6 1.1 7.6 2.9l5.7-5.7C33.9 6.5 29.2 4.5 24 4.5 16.3 4.5 9.7 8.8 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 43.5c5.1 0 9.7-1.9 13.2-5.1l-6.1-5c-2 1.4-4.4 2.2-7.1 2.2-5.4 0-9.9-3.2-11.3-7.9l-6.5 5C9.6 39.1 16.2 43.5 24 43.5z"/>
+            <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.7 2-2 3.7-3.7 4.9l6.1 5c-.4.4 6.8-4.9 6.8-13.9 0-1.2-.1-2.4-.3-3.5z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div className="my-6 flex items-center gap-3 text-xs text-[#5F5E5A]">
+          <span className="h-px flex-1 bg-[#D3D1C7]" />
+          or use email
+          <span className="h-px flex-1 bg-[#D3D1C7]" />
+        </div>
+
+        <form onSubmit={submit} className="space-y-4">
           <label className="block">
             <span className="text-sm font-medium text-[#2C2C2A]">Email</span>
             <input
