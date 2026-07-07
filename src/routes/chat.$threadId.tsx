@@ -1,5 +1,7 @@
 import { createFileRoute, Link, useNavigate, useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useApp } from "@/context/AppContext";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { supabase } from "@/integrations/supabase/client";
@@ -183,18 +185,51 @@ function ChatThread() {
             )}
             {messages.map((m, i) => {
               const isUser = m.role === "user";
+              const isError = m.content.startsWith("ERROR:");
               return (
                 <div key={i} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                       isUser
-                        ? "bg-[#534AB7] text-white"
-                        : m.content.startsWith("ERROR:")
-                        ? "bg-[#FAECE7] border border-[#D85A30] text-[#633806]"
+                        ? "bg-[#534AB7] text-white whitespace-pre-wrap"
+                        : isError
+                        ? "bg-[#FAECE7] border border-[#D85A30] text-[#633806] whitespace-pre-wrap"
                         : "bg-white border border-[#D3D1C7] text-[#2C2C2A]"
                     }`}
                   >
-                    {m.content}
+                    {isUser || isError ? (
+                      m.content
+                    ) : (
+                      <div className="prose-chat">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            h1: (p) => <h1 className="mb-2 mt-3 text-base font-bold text-[#2C2C2A]" {...p} />,
+                            h2: (p) => <h2 className="mb-2 mt-3 text-base font-bold text-[#2C2C2A]" {...p} />,
+                            h3: (p) => <h3 className="mb-1 mt-3 text-sm font-bold text-[#2C2C2A]" {...p} />,
+                            h4: (p) => <h4 className="mb-1 mt-2 text-sm font-bold text-[#2C2C2A]" {...p} />,
+                            p: (p) => <p className="mb-2 last:mb-0" {...p} />,
+                            ul: (p) => <ul className="mb-2 list-disc space-y-1 pl-5 last:mb-0" {...p} />,
+                            ol: (p) => <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0" {...p} />,
+                            li: (p) => <li className="leading-relaxed" {...p} />,
+                            strong: (p) => <strong className="font-bold text-[#2C2C2A]" {...p} />,
+                            em: (p) => <em className="italic" {...p} />,
+                            a: (p) => <a className="text-[#534AB7] underline" target="_blank" rel="noreferrer" {...p} />,
+                            code: ({ className, children, ...rest }: any) => {
+                              const isBlock = /language-/.test(className || "");
+                              return isBlock ? (
+                                <code className="block overflow-x-auto rounded-md bg-[#F1EFE8] p-2 font-mono text-xs" {...rest}>{children}</code>
+                              ) : (
+                                <code className="rounded bg-[#F1EFE8] px-1 py-0.5 font-mono text-xs" {...rest}>{children}</code>
+                              );
+                            },
+                            blockquote: (p) => <blockquote className="my-2 border-l-2 border-[#D3D1C7] pl-3 text-[#5F5E5A]" {...p} />,
+                          }}
+                        >
+                          {m.content}
+                        </ReactMarkdown>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
