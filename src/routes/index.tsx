@@ -166,6 +166,94 @@ function Landing() {
         </div>
       </section>
 
+      {/* What Raahi delivers */}
+      <section className="border-y border-[#D3D1C7] bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#534AB7]">WHAT RAAHI DELIVERS</span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">Everything you need to go from lost to hired</h2>
+          <p className="mt-3 max-w-2xl text-[#5F5E5A]">Start with the core journey. Unlock more as you grow.</p>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {/* Available now */}
+            <div>
+              <span className="inline-flex rounded-full bg-[#534AB7] px-3 py-1 text-xs font-semibold text-white">Available now</span>
+              <div className="mt-6 grid gap-4">
+                {[
+                  {
+                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>,
+                    title: "Personalised career recommendations",
+                    desc: "AI analyzes your background and suggests the 3 tech roles that fit you specifically — not a generic list.",
+                  },
+                  {
+                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7v14a2 2 0 0 0 2 2h14"/><path d="M3 7h18"/><path d="M3 7l9-4 9 4"/><path d="m8 12 2 2 4-4"/></svg>,
+                    title: "Personalised roadmap",
+                    desc: "A week-by-week plan built around your timeline, budget, and learning style. Edit it anytime.",
+                  },
+                  {
+                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>,
+                    title: "AI mentorship chat",
+                    desc: "Your mentor knows your background, your roadmap, and where you are right now. Available anytime, judgment-free.",
+                  },
+                  {
+                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>,
+                    title: "Weekly accountability check-in",
+                    desc: "Raahi checks in at the start of every week, reviews your progress, and adjusts your plan if needed.",
+                  },
+                ].map((f) => (
+                  <div key={f.title} className="rounded-2xl border border-[#D3D1C7] bg-white p-5 transition hover:border-[#AFA9EC]">
+                    <div className="flex items-start gap-4">
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#EEEDFE] text-[#534AB7]">{f.icon}</div>
+                      <div>
+                        <h3 className="font-semibold text-[#2C2C2A]">{f.title}</h3>
+                        <p className="mt-1 text-sm text-[#5F5E5A]">{f.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Coming soon */}
+            <div>
+              <span className="inline-flex rounded-full bg-[#E8E8E5] px-3 py-1 text-xs font-semibold text-[#5F5E5A]">Coming soon</span>
+              <div className="mt-6 grid gap-4">
+                {[
+                  {
+                    title: "CV and cover letter generator",
+                    desc: "AI-written applications tailored to your target role and the skills you have built.",
+                  },
+                  {
+                    title: "Portfolio builder",
+                    desc: "Guides you on which projects to build based on current hiring trends for your target role.",
+                  },
+                  {
+                    title: "Interview prep",
+                    desc: "AI mock interviews for your specific target role with personalised feedback.",
+                  },
+                  {
+                    title: "Job search and LinkedIn strategy",
+                    desc: "Targeted outreach templates, LinkedIn optimisation, and company research guides.",
+                  },
+                ].map((f) => (
+                  <div key={f.title} className="relative rounded-2xl border border-[#D3D1C7] bg-[#FAFAF8] p-5">
+                    <span className="absolute top-4 right-4 rounded-md bg-[#FAEEDA] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#633806]">Coming in v2</span>
+                    <div className="flex items-start gap-4">
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#E8E8E5] text-[#9F9E99]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      </div>
+                      <div className="pr-20">
+                        <h3 className="font-semibold text-[#5F5E5A]">{f.title}</h3>
+                        <p className="mt-1 text-sm text-[#9F9E99]">{f.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Proof */}
       <section id="proof" className="bg-[#E1F5EE]/40 border-y border-[#D3D1C7]">
         <div className="mx-auto max-w-6xl px-6 py-20">
