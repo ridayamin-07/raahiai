@@ -18,8 +18,8 @@ type Rec = {
 };
 
 const CARD_THEMES = [
-  { bg: "bg-[#EEEDFE]", border: "border-[#AFA9EC]", accent: "#534AB7", chip: "bg-[#534AB7] text-white", bar: "bg-[#534AB7]" },
-  { bg: "bg-[#E1F5EE]", border: "border-[#1D9E75]/40", accent: "#1D9E75", chip: "bg-[#1D9E75] text-white", bar: "bg-[#1D9E75]" },
+  { bg: "bg-[#e6f0eb]", border: "border-[#a4c8b8]", accent: "#064e3b", chip: "bg-[#064e3b] text-white", bar: "bg-[#064e3b]" },
+  { bg: "bg-[#e1efe4]", border: "border-[#0d7a5f]/40", accent: "#0d7a5f", chip: "bg-[#0d7a5f] text-white", bar: "bg-[#0d7a5f]" },
   { bg: "bg-[#FAECE7]", border: "border-[#D85A30]/40", accent: "#D85A30", chip: "bg-[#D85A30] text-white", bar: "bg-[#D85A30]" },
 ];
 
@@ -115,31 +115,31 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
   if (!ready || !session) return null;
 
   return (
-    <div className="min-h-screen bg-[#F1EFE8] pb-20">
-      <header className="border-b border-[#D3D1C7] bg-[#F1EFE8]/90 backdrop-blur sticky top-0 z-30">
+    <div className="min-h-screen bg-[#f5f0e0] pb-20">
+      <header className="border-b border-[#e2d4a8] bg-[#f5f0e0]/90 backdrop-blur sticky top-0 z-30">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#534AB7]">.AI</span></Link>
-          <Link to="/survey" className="text-sm text-[#5F5E5A] hover:text-[#2C2C2A]">← Edit answers</Link>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#064e3b]">.AI</span></Link>
+          <Link to="/survey" className="text-sm text-[#4b6b60] hover:text-[#064e3b]">← Edit answers</Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pt-10">
         <h1 className="text-3xl font-bold md:text-4xl">3 paths matched to who you are</h1>
-        <p className="mt-2 text-[#5F5E5A]">Each one is built from your answers. Reject any that don't feel right.</p>
+        <p className="mt-2 text-[#4b6b60]">Each one is built from your answers. Reject any that don't feel right.</p>
 
-        <div className="mt-6 flex flex-wrap gap-2 rounded-2xl border border-[#D3D1C7] bg-white px-5 py-4 text-sm">
-          <span className="text-[#5F5E5A]">For:</span>
+        <div className="mt-6 flex flex-wrap gap-2 rounded-2xl border border-[#e2d4a8] bg-white px-5 py-4 text-sm">
+          <span className="text-[#4b6b60]">For:</span>
           <span className="font-medium">{p.background || "—"}</span>
-          <span className="text-[#5F5E5A]">·</span>
+          <span className="text-[#4b6b60]">·</span>
           <span className="font-medium">{p.motivation || "—"}</span>
-          <span className="text-[#5F5E5A]">·</span>
+          <span className="text-[#4b6b60]">·</span>
           <span className="font-medium">{p.timePerWeek || "—"}</span>
         </div>
 
         {loading && (
           <div className="mt-12 grid place-items-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#EEEDFE] border-t-[#534AB7]" />
-            <p className="mt-4 text-[#5F5E5A]">Reading your answers carefully…</p>
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#e6f0eb] border-t-[#064e3b]" />
+            <p className="mt-4 text-[#4b6b60]">Reading your answers carefully…</p>
           </div>
         )}
 
@@ -161,8 +161,8 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
                   than you think. Want to try once more, or revisit your answers?
                 </p>
                 <div className="mt-3 flex gap-3">
-                  <button onClick={fetchRecs} className="rounded-full bg-[#534AB7] px-5 py-2 text-sm font-semibold text-white">Regenerate anyway</button>
-                  <Link to="/survey" className="rounded-full border border-[#D3D1C7] bg-white px-5 py-2 text-sm font-semibold">Edit my answers</Link>
+                  <button onClick={fetchRecs} className="rounded-full bg-[#064e3b] px-5 py-2 text-sm font-semibold text-white">Regenerate anyway</button>
+                  <Link to="/survey" className="rounded-full border border-[#e2d4a8] bg-white px-5 py-2 text-sm font-semibold">Edit my answers</Link>
                 </div>
               </div>
             )}
@@ -184,8 +184,8 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
                         {Math.round(r.match_score)}% match
                       </span>
                     </div>
-                    <h3 className="mt-4 text-xl font-bold text-[#2C2C2A]">{r.career_path}</h3>
-                    <p className="mt-1 text-xs text-[#5F5E5A]">Job-ready in {r.time_to_job_ready}</p>
+                    <h3 className="mt-4 text-xl font-bold text-[#064e3b]">{r.career_path}</h3>
+                    <p className="mt-1 text-xs text-[#4b6b60]">Job-ready in {r.time_to_job_ready}</p>
 
                     <div className="mt-3 h-2 w-full rounded-full bg-white/70">
                       <div className={`h-2 rounded-full ${theme.bar}`} style={{ width: `${Math.min(100, r.match_score)}%` }} />
@@ -195,7 +195,7 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
                       <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: theme.accent }}>
                         Why this fits you
                       </p>
-                      <ul className="mt-2 space-y-2 text-sm text-[#2C2C2A]">
+                      <ul className="mt-2 space-y-2 text-sm text-[#064e3b]">
                         {(r.why_this_fits || []).map((w, idx) => (
                           <li key={idx} className="flex gap-2">
                             <span style={{ color: theme.accent }}>•</span>
@@ -215,7 +215,7 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
                       </button>
                       <button
                         onClick={() => reject(r.career_path)}
-                        className="rounded-full border border-[#D3D1C7] bg-white px-4 py-2.5 text-sm font-semibold text-[#5F5E5A] hover:text-[#2C2C2A]"
+                        className="rounded-full border border-[#e2d4a8] bg-white px-4 py-2.5 text-sm font-semibold text-[#4b6b60] hover:text-[#064e3b]"
                       >
                         Not for me
                       </button>
@@ -229,7 +229,7 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
               <div className="mt-8 flex justify-center">
                 <button
                   onClick={handleRegen}
-                  className="rounded-full border border-[#AFA9EC] bg-white px-6 py-2.5 text-sm font-semibold text-[#534AB7] hover:bg-[#EEEDFE]"
+                  className="rounded-full border border-[#a4c8b8] bg-white px-6 py-2.5 text-sm font-semibold text-[#064e3b] hover:bg-[#e6f0eb]"
                 >
                   ↻ Regenerate fresh paths
                 </button>
@@ -239,13 +239,13 @@ NEVER include any of these rejected paths: ${[...state.rejectedPaths, ...rejecte
         )}
 
         {chosen && (
-          <div className="mt-10 rounded-3xl border border-[#1D9E75]/40 bg-[#E1F5EE] p-8 text-center">
-            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#1D9E75] text-2xl text-white">✓</div>
+          <div className="mt-10 rounded-3xl border border-[#0d7a5f]/40 bg-[#e1efe4] p-8 text-center">
+            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#0d7a5f] text-2xl text-white">✓</div>
             <h2 className="mt-4 text-2xl font-bold">You picked {chosen.career_path}</h2>
-            <p className="mt-2 text-[#085041]">Good choice. Let's build a week-by-week plan you can actually follow.</p>
+            <p className="mt-2 text-[#064e3b]">Good choice. Let's build a week-by-week plan you can actually follow.</p>
             <button
               onClick={() => navigate({ to: "/roadmap" })}
-              className="mt-6 rounded-full bg-[#1D9E75] px-7 py-3 font-semibold text-white hover:bg-[#085041]"
+              className="mt-6 rounded-full bg-[#0d7a5f] px-7 py-3 font-semibold text-white hover:bg-[#064e3b]"
             >
               Build my roadmap →
             </button>

@@ -197,28 +197,28 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
   if (!ready || !session) return null;
 
   return (
-    <div className="min-h-screen bg-[#F1EFE8] pb-20">
-      <header className="sticky top-0 z-30 border-b border-[#D3D1C7] bg-[#F1EFE8]/95 backdrop-blur">
+    <div className="min-h-screen bg-[#f5f0e0] pb-20">
+      <header className="sticky top-0 z-30 border-b border-[#e2d4a8] bg-[#f5f0e0]/95 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#534AB7]">.AI</span></Link>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#064e3b]">.AI</span></Link>
           <div className="flex items-center gap-4">
-            <Link to="/recommendations" className="text-sm text-[#5F5E5A] hover:text-[#2C2C2A]">← Choose a different path</Link>
-            <span className="text-sm text-[#5F5E5A]">Roadmap · {state.careerPath}</span>
+            <Link to="/recommendations" className="text-sm text-[#4b6b60] hover:text-[#064e3b]">← Choose a different path</Link>
+            <span className="text-sm text-[#4b6b60]">Roadmap · {state.careerPath}</span>
           </div>
         </div>
       </header>
 
       <main className="mx-auto max-w-4xl px-6 pt-10">
         <h1 className="text-3xl font-bold md:text-4xl">Your roadmap into {state.careerPath || "tech"}</h1>
-        <p className="mt-2 text-[#5F5E5A]">One week at a time. Built around your hours and learning style.</p>
+        <p className="mt-2 text-[#4b6b60]">One week at a time. Built around your hours and learning style.</p>
 
-        <div className="mt-6 inline-flex rounded-full border border-[#D3D1C7] bg-white p-1">
+        <div className="mt-6 inline-flex rounded-full border border-[#e2d4a8] bg-white p-1">
           {[1, 2, 3].map((m) => (
             <button
               key={m}
               onClick={() => switchMonths(m)}
               className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                months === m ? "bg-[#534AB7] text-white" : "text-[#5F5E5A]"
+                months === m ? "bg-[#064e3b] text-white" : "text-[#4b6b60]"
               }`}
             >
               {m} month{m > 1 ? "s" : ""}
@@ -228,8 +228,8 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
 
         {loading && (
           <div className="mt-16 grid place-items-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#EEEDFE] border-t-[#534AB7]" />
-            <p className="mt-4 text-[#5F5E5A]">Drafting your {months}-month plan…</p>
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#e6f0eb] border-t-[#064e3b]" />
+            <p className="mt-4 text-[#4b6b60]">Drafting your {months}-month plan…</p>
           </div>
         )}
 
@@ -262,19 +262,19 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                   <button
                     onClick={() => handleCheckIn("Done it all", false)}
                     className="rounded-full px-4 py-1.5 text-xs font-semibold text-white"
-                    style={{ background: "#534AB7" }}
+                    style={{ background: "#064e3b" }}
                   >
                     Done it all
                   </button>
                   <button
                     onClick={() => handleCheckIn("Partially done", false)}
-                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                    className="rounded-full border border-[#e2d4a8] bg-white px-4 py-1.5 text-xs font-semibold text-[#4b6b60]"
                   >
                     Partially done
                   </button>
                   <button
                     onClick={() => handleCheckIn("Got stuck", true)}
-                    className="rounded-full border border-[#D3D1C7] bg-white px-4 py-1.5 text-xs font-semibold text-[#5F5E5A]"
+                    className="rounded-full border border-[#e2d4a8] bg-white px-4 py-1.5 text-xs font-semibold text-[#4b6b60]"
                   >
                     Got stuck
                   </button>
@@ -282,13 +282,13 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
               </div>
             )}
 
-            <div className="mt-8 rounded-2xl border border-[#D3D1C7] bg-white p-5">
+            <div className="mt-8 rounded-2xl border border-[#e2d4a8] bg-white p-5">
               <div className="flex justify-between text-sm">
                 <span className="font-semibold">Week {state.currentWeek} of {totalWeeks}</span>
-                <span className="text-[#5F5E5A]">{overall}% complete</span>
+                <span className="text-[#4b6b60]">{overall}% complete</span>
               </div>
-              <div className="mt-3 h-2 rounded-full bg-[#EEEDFE]">
-                <div className="h-2 rounded-full bg-[#534AB7] transition-all" style={{ width: `${overall}%` }} />
+              <div className="mt-3 h-2 rounded-full bg-[#e6f0eb]">
+                <div className="h-2 rounded-full bg-[#064e3b] transition-all" style={{ width: `${overall}%` }} />
               </div>
             </div>
 
@@ -301,16 +301,16 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                 const status =
                   state.currentWeek > maxW ? "done" : state.currentWeek >= minW ? "active" : "upcoming";
                 const dotColor =
-                  status === "done" ? "bg-[#1D9E75]" : status === "active" ? "bg-[#534AB7]" : "bg-[#D3D1C7]";
+                  status === "done" ? "bg-[#0d7a5f]" : status === "active" ? "bg-[#064e3b]" : "bg-[#e2d4a8]";
                 const badge =
                   status === "done"
-                    ? "bg-[#E1F5EE] text-[#085041]"
+                    ? "bg-[#e1efe4] text-[#064e3b]"
                     : status === "active"
-                    ? "bg-[#EEEDFE] text-[#3C3489]"
-                    : "bg-[#F1EFE8] text-[#5F5E5A]";
+                    ? "bg-[#e6f0eb] text-[#043326]"
+                    : "bg-[#f5f0e0] text-[#4b6b60]";
 
                 return (
-                  <div key={pi} className="overflow-hidden rounded-2xl border border-[#D3D1C7] bg-white">
+                  <div key={pi} className="overflow-hidden rounded-2xl border border-[#e2d4a8] bg-white">
                     <button
                       onClick={() => setOpenPhase(open ? -1 : pi)}
                       className="flex w-full items-center justify-between px-5 py-4 text-left"
@@ -320,15 +320,15 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                         <span className="font-semibold">{phase.title}</span>
                         <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${badge}`}>{status}</span>
                       </div>
-                      <span className="text-[#5F5E5A]">{open ? "−" : "+"}</span>
+                      <span className="text-[#4b6b60]">{open ? "−" : "+"}</span>
                     </button>
 
                     {open && (
-                      <div className="border-t border-[#D3D1C7] bg-[#F1EFE8]/40">
-                        <div className="px-5 py-3 text-sm text-[#5F5E5A]">
-                          Milestone: <span className="font-medium text-[#2C2C2A]">{phase.milestone}</span>
+                      <div className="border-t border-[#e2d4a8] bg-[#f5f0e0]/40">
+                        <div className="px-5 py-3 text-sm text-[#4b6b60]">
+                          Milestone: <span className="font-medium text-[#064e3b]">{phase.milestone}</span>
                         </div>
-                        <div className="divide-y divide-[#D3D1C7]">
+                        <div className="divide-y divide-[#e2d4a8]">
                           {phase.weeks.map((w) => {
                             const isCurrent = w.week === state.currentWeek;
                             const dailyKey = `p${pi}w${w.week}`;
@@ -340,7 +340,7 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                                     <div className="flex items-center gap-2">
                                       <h4 className="font-semibold">Week {w.week} — {w.title}</h4>
                                       {isCurrent && (
-                                        <span className="rounded-full bg-[#534AB7] px-2 py-0.5 text-xs font-medium text-white">
+                                        <span className="rounded-full bg-[#064e3b] px-2 py-0.5 text-xs font-medium text-white">
                                           This week
                                         </span>
                                       )}
@@ -355,13 +355,13 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                                               onClick={() => toggleTask(id)}
                                               className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
                                                 done
-                                                  ? "border-[#1D9E75] bg-[#1D9E75] text-white"
-                                                  : "border-[#D3D1C7] bg-white"
+                                                  ? "border-[#0d7a5f] bg-[#0d7a5f] text-white"
+                                                  : "border-[#e2d4a8] bg-white"
                                               }`}
                                             >
                                               {done ? "✓" : ""}
                                             </button>
-                                            <span className={done ? "line-through text-[#5F5E5A]" : ""}>{t}</span>
+                                            <span className={done ? "line-through text-[#4b6b60]" : ""}>{t}</span>
                                           </li>
                                         );
                                       })}
@@ -369,7 +369,7 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
 
                                     <button
                                       onClick={() => setShowDaily((s) => ({ ...s, [dailyKey]: !s[dailyKey] }))}
-                                      className="mt-3 text-xs font-semibold text-[#534AB7]"
+                                      className="mt-3 text-xs font-semibold text-[#064e3b]"
                                     >
                                       {dailyOpen ? "Hide daily breakdown ↑" : "Show daily breakdown ↓"}
                                     </button>
@@ -377,7 +377,7 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
                                     {dailyOpen && (
                                       <ul className="mt-3 space-y-1.5 rounded-xl bg-white p-4 text-sm">
                                         {(w.daily_breakdown || []).map((d, di) => (
-                                          <li key={di} className="text-[#5F5E5A]">{d}</li>
+                                          <li key={di} className="text-[#4b6b60]">{d}</li>
                                         ))}
                                       </ul>
                                     )}
@@ -396,28 +396,28 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
 
             <Link
               to="/chat"
-              className="mt-10 flex items-center justify-between rounded-2xl bg-[#534AB7] px-6 py-5 text-white transition hover:bg-[#3C3489]"
+              className="mt-10 flex items-center justify-between rounded-2xl bg-[#064e3b] px-6 py-5 text-white transition hover:bg-[#043326]"
             >
               <div>
                 <p className="font-semibold">Stuck on this week?</p>
-                <p className="text-sm text-[#EEEDFE]">Ask your mentor — Raahi already knows your plan.</p>
+                <p className="text-sm text-[#e6f0eb]">Ask your mentor — Raahi already knows your plan.</p>
               </div>
               <span>↗</span>
             </Link>
 
-            <div className="mt-10 rounded-3xl border border-[#D3D1C7] bg-white p-8">
+            <div className="mt-10 rounded-3xl border border-[#e2d4a8] bg-white p-8">
               <h2 className="text-2xl font-bold">How do you want to walk this?</h2>
-              <p className="mt-2 text-[#5F5E5A]">You can change your mind anytime.</p>
+              <p className="mt-2 text-[#4b6b60]">You can change your mind anytime.</p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <button
                   onClick={() => pickMode("solo")}
-                  className="flex-1 rounded-2xl border border-[#1D9E75]/40 bg-[#E1F5EE] px-5 py-4 text-left font-semibold text-[#085041] hover:border-[#1D9E75]"
+                  className="flex-1 rounded-2xl border border-[#0d7a5f]/40 bg-[#e1efe4] px-5 py-4 text-left font-semibold text-[#064e3b] hover:border-[#0d7a5f]"
                 >
                   I'll execute alone →
                 </button>
                 <button
                   onClick={() => pickMode("mentor")}
-                  className="flex-1 rounded-2xl border border-[#AFA9EC] bg-[#EEEDFE] px-5 py-4 text-left font-semibold text-[#3C3489] hover:border-[#534AB7]"
+                  className="flex-1 rounded-2xl border border-[#a4c8b8] bg-[#e6f0eb] px-5 py-4 text-left font-semibold text-[#043326] hover:border-[#064e3b]"
                 >
                   AI mentor walks with me →
                 </button>
