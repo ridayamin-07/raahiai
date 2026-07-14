@@ -148,10 +148,6 @@ function Landing() {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-[#064e3b]/10 bg-white px-5 py-4 shadow-xl md:block">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#0d7a5f]">Free · 5 min</p>
-              <p className="mt-1 text-sm font-bold text-[#064e3b]" style={sora}>No sign-up to start</p>
-            </div>
           </div>
         </div>
       </section>
