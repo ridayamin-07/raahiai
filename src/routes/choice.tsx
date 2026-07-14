@@ -26,7 +26,7 @@ function Choice() {
     <div className="min-h-screen bg-[#f5f0e0] pb-20">
       <header className="border-b border-[#e2d4a8] bg-[#f5f0e0]/90 sticky top-0 z-30">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#064e3b]">.AI</span></Link>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#c9a84c]">.AI</span></Link>
           <Link to="/roadmap" className="text-sm text-[#4b6b60] hover:text-[#064e3b]">← Back to roadmap</Link>
         </div>
       </header>

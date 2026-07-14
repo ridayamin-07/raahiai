@@ -200,7 +200,7 @@ Total weeks must equal ${m * 4}. Split into 2-3 phases. Tailor to their time per
     <div className="min-h-screen bg-[#f5f0e0] pb-20">
       <header className="sticky top-0 z-30 border-b border-[#e2d4a8] bg-[#f5f0e0]/95 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#064e3b]">.AI</span></Link>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#c9a84c]">.AI</span></Link>
           <div className="flex items-center gap-4">
             <Link to="/recommendations" className="text-sm text-[#4b6b60] hover:text-[#064e3b]">← Choose a different path</Link>
             <span className="text-sm text-[#4b6b60]">Roadmap · {state.careerPath}</span>

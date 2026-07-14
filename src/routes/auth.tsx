@@ -67,7 +67,7 @@ function AuthPage() {
       <header className="border-b border-[#e2d4a8]">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="text-xl font-bold">
-            Raahi<span className="text-[#064e3b]">.AI</span>
+            Raahi<span className="text-[#c9a84c]">.AI</span>
           </Link>
           <Link to="/" className="text-sm text-[#4b6b60] hover:text-[#064e3b]">← Home</Link>
         </div>

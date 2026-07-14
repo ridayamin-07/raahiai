@@ -98,7 +98,7 @@ function Survey() {
           <div className="h-2 bg-[#064e3b] transition-all" style={{ width: `${progress}%` }} />
         </div>
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4 text-sm">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#064e3b]">.AI</span></Link>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#c9a84c]">.AI</span></Link>
           <span className="text-[#4b6b60]">Question {step + 1} of {QUESTIONS.length}</span>
         </div>
       </div>
