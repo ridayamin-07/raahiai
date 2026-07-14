@@ -337,7 +337,7 @@ function Landing() {
           <div className="rounded-3xl border border-[#064e3b]/10 bg-white p-12 text-center shadow-2xl md:p-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#0d7a5f]">Free · No credit card</span>
             <h2 className="mt-4 text-4xl font-bold md:text-5xl" style={sora}>
-              Ready to rewrite your story?
+              Stop scrolling<br />Start moving
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-[#064e3b]/70">
               Join non-tech graduates who have already made the switch. Your journey into the
