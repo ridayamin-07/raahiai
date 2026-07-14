@@ -65,24 +65,24 @@ function Survey() {
 
   if (done) {
     return (
-      <div className="min-h-screen bg-[#F1EFE8] px-6 py-16">
-        <div className="mx-auto max-w-2xl rounded-3xl border border-[#D3D1C7] bg-white p-10 text-center">
-          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#E1F5EE] text-3xl">✓</div>
+      <div className="min-h-screen bg-[#f5f0e0] px-6 py-16">
+        <div className="mx-auto max-w-2xl rounded-3xl border border-[#e2d4a8] bg-white p-10 text-center">
+          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#e1efe4] text-3xl">✓</div>
           <h1 className="mt-6 text-3xl font-bold">Got it. Reading you back…</h1>
-          <p className="mt-3 text-[#5F5E5A]">
+          <p className="mt-3 text-[#4b6b60]">
             We're going to match your background, time, and goals to careers that actually fit.
           </p>
           <div className="mt-8 grid gap-3 text-left text-sm">
             {Object.entries(profile).slice(0, 6).map(([k, v]) => (
-              <div key={k} className="flex justify-between gap-4 rounded-lg border border-[#D3D1C7] px-4 py-2">
-                <span className="text-[#5F5E5A]">{k}</span>
-                <span className="font-medium text-[#2C2C2A]">{Array.isArray(v) ? v.join(", ") : String(v)}</span>
+              <div key={k} className="flex justify-between gap-4 rounded-lg border border-[#e2d4a8] px-4 py-2">
+                <span className="text-[#4b6b60]">{k}</span>
+                <span className="font-medium text-[#064e3b]">{Array.isArray(v) ? v.join(", ") : String(v)}</span>
               </div>
             ))}
           </div>
           <button
             onClick={() => navigate({ to: "/recommendations" })}
-            className="mt-8 rounded-full bg-[#534AB7] px-7 py-3 font-semibold text-white hover:bg-[#3C3489]"
+            className="mt-8 rounded-full bg-[#064e3b] px-7 py-3 font-semibold text-white hover:bg-[#043326]"
           >
             Show me my paths →
           </button>
@@ -92,21 +92,21 @@ function Survey() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F1EFE8]">
-      <div className="sticky top-0 z-30 bg-[#F1EFE8]/95 backdrop-blur">
-        <div className="h-2 bg-[#EEEDFE]">
-          <div className="h-2 bg-[#534AB7] transition-all" style={{ width: `${progress}%` }} />
+    <div className="min-h-screen bg-[#f5f0e0]">
+      <div className="sticky top-0 z-30 bg-[#f5f0e0]/95 backdrop-blur">
+        <div className="h-2 bg-[#e6f0eb]">
+          <div className="h-2 bg-[#064e3b] transition-all" style={{ width: `${progress}%` }} />
         </div>
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4 text-sm">
-          <Link to="/" className="font-bold">Raahi<span className="text-[#534AB7]">.AI</span></Link>
-          <span className="text-[#5F5E5A]">Question {step + 1} of {QUESTIONS.length}</span>
+          <Link to="/" className="font-bold">Raahi<span className="text-[#c9a84c]">.AI</span></Link>
+          <span className="text-[#4b6b60]">Question {step + 1} of {QUESTIONS.length}</span>
         </div>
       </div>
 
       <main className="mx-auto max-w-2xl px-6 py-12">
         <h1 className="text-3xl font-bold leading-snug">{q.q}</h1>
-        {q.type === "multi" && <p className="mt-2 text-sm text-[#5F5E5A]">Pick as many as feel true.</p>}
-        {q.type === "tags" && <p className="mt-2 text-sm text-[#5F5E5A]">Tap any that apply.</p>}
+        {q.type === "multi" && <p className="mt-2 text-sm text-[#4b6b60]">Pick as many as feel true.</p>}
+        {q.type === "tags" && <p className="mt-2 text-sm text-[#4b6b60]">Tap any that apply.</p>}
 
         <div className="mt-8">
           {q.type === "single" && (
@@ -119,8 +119,8 @@ function Survey() {
                     onClick={() => setVal(opt)}
                     className={`rounded-xl border px-5 py-4 text-left transition ${
                       active
-                        ? "border-[#534AB7] bg-[#EEEDFE] text-[#3C3489]"
-                        : "border-[#D3D1C7] bg-white hover:border-[#AFA9EC]"
+                        ? "border-[#064e3b] bg-[#e6f0eb] text-[#043326]"
+                        : "border-[#e2d4a8] bg-white hover:border-[#a4c8b8]"
                     }`}
                   >
                     {opt}
@@ -133,7 +133,7 @@ function Survey() {
                   value={value === "Something else" ? "" : value || ""}
                   onChange={(e) => setVal(e.target.value)}
                   placeholder="Please specify your educational background..."
-                  className="rounded-xl border border-[#534AB7] bg-white px-5 py-4 text-[#2C2C2A] placeholder:text-[#5F5E5A] focus:border-[#534AB7] focus:outline-none"
+                  className="rounded-xl border border-[#064e3b] bg-white px-5 py-4 text-[#064e3b] placeholder:text-[#4b6b60] focus:border-[#064e3b] focus:outline-none"
                   autoFocus
                 />
               )}
@@ -151,8 +151,8 @@ function Survey() {
                     onClick={() => toggleMulti(opt)}
                     className={`rounded-xl border px-4 py-3 text-left transition ${
                       active
-                        ? "border-[#534AB7] bg-[#EEEDFE] text-[#3C3489]"
-                        : "border-[#D3D1C7] bg-white hover:border-[#AFA9EC]"
+                        ? "border-[#064e3b] bg-[#e6f0eb] text-[#043326]"
+                        : "border-[#e2d4a8] bg-white hover:border-[#a4c8b8]"
                     }`}
                   >
                     <span className="mr-2">{active ? "✓" : "+"}</span>
@@ -174,8 +174,8 @@ function Survey() {
                     onClick={() => toggleMulti(opt)}
                     className={`rounded-full border px-4 py-2 text-sm transition ${
                       active
-                        ? "border-[#534AB7] bg-[#534AB7] text-white"
-                        : "border-[#D3D1C7] bg-white text-[#2C2C2A] hover:border-[#AFA9EC]"
+                        ? "border-[#064e3b] bg-[#064e3b] text-white"
+                        : "border-[#e2d4a8] bg-white text-[#064e3b] hover:border-[#a4c8b8]"
                     }`}
                   >
                     {opt}
@@ -191,7 +191,7 @@ function Survey() {
               onChange={(e) => setVal(e.target.value)}
               placeholder={q.placeholder}
               rows={5}
-              className="w-full rounded-xl border border-[#D3D1C7] bg-white px-4 py-3 text-[#2C2C2A] placeholder:text-[#5F5E5A] focus:border-[#534AB7] focus:outline-none"
+              className="w-full rounded-xl border border-[#e2d4a8] bg-white px-4 py-3 text-[#064e3b] placeholder:text-[#4b6b60] focus:border-[#064e3b] focus:outline-none"
             />
           )}
         </div>
@@ -200,14 +200,14 @@ function Survey() {
           <button
             onClick={() => setStep(Math.max(0, step - 1))}
             disabled={step === 0}
-            className="rounded-full border border-[#D3D1C7] bg-white px-5 py-2.5 text-sm font-semibold text-[#2C2C2A] disabled:opacity-40"
+            className="rounded-full border border-[#e2d4a8] bg-white px-5 py-2.5 text-sm font-semibold text-[#064e3b] disabled:opacity-40"
           >
             ← Back
           </button>
           <button
             onClick={next}
             disabled={!isAnswered()}
-            className="rounded-full bg-[#534AB7] px-7 py-2.5 text-sm font-semibold text-white hover:bg-[#3C3489] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-full bg-[#064e3b] px-7 py-2.5 text-sm font-semibold text-white hover:bg-[#043326] disabled:cursor-not-allowed disabled:opacity-40"
           >
             {step === QUESTIONS.length - 1 ? "Finish" : "Next →"}
           </button>

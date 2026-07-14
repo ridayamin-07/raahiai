@@ -65,12 +65,12 @@ function ChatLayout() {
   if (!ready || !session) return null;
 
   const Sidebar = (
-    <aside className="flex h-full w-72 flex-col border-r border-[#D3D1C7] bg-white">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#D3D1C7]">
-        <Link to="/" className="text-sm font-semibold text-[#2C2C2A]">← Raahi</Link>
+    <aside className="flex h-full w-72 flex-col border-r border-[#e2d4a8] bg-white">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#e2d4a8]">
+        <Link to="/" className="text-sm font-semibold text-[#064e3b]">← Raahi</Link>
         <button
           onClick={() => setMobileOpen(false)}
-          className="rounded p-1 text-[#5F5E5A] md:hidden"
+          className="rounded p-1 text-[#4b6b60] md:hidden"
           aria-label="Close sidebar"
         >
           <X className="h-4 w-4" />
@@ -79,15 +79,15 @@ function ChatLayout() {
       <div className="p-3">
         <button
           onClick={newChat}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-[#534AB7] px-4 py-2 text-sm font-semibold text-white hover:bg-[#453ea0]"
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-[#064e3b] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d7a5f]"
         >
           <Plus className="h-4 w-4" /> New chat
         </button>
       </div>
       <div className="flex-1 overflow-y-auto px-2 pb-4">
-        {loading && <p className="px-3 py-2 text-xs text-[#5F5E5A]">Loading…</p>}
+        {loading && <p className="px-3 py-2 text-xs text-[#4b6b60]">Loading…</p>}
         {!loading && threads.length === 0 && (
-          <p className="px-3 py-2 text-xs text-[#5F5E5A]">No chats yet. Start one!</p>
+          <p className="px-3 py-2 text-xs text-[#4b6b60]">No chats yet. Start one!</p>
         )}
         <ul className="space-y-1">
           {threads.map((t) => {
@@ -100,8 +100,8 @@ function ChatLayout() {
                   onClick={() => setMobileOpen(false)}
                   className={`block truncate rounded-lg px-3 py-2 pr-8 text-sm ${
                     isActive
-                      ? "bg-[#EEEDFE] text-[#2C2C2A] font-medium"
-                      : "text-[#3C3B37] hover:bg-[#F1EFE8]"
+                      ? "bg-[#e6f0eb] text-[#064e3b] font-medium"
+                      : "text-[#064e3b] hover:bg-[#f5f0e0]"
                   }`}
                 >
                   {t.title || "Untitled"}
@@ -112,7 +112,7 @@ function ChatLayout() {
                     e.stopPropagation();
                     deleteThread(t.id);
                   }}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 rounded p-1 text-[#5F5E5A] opacity-0 hover:text-[#D85A30] group-hover:opacity-100"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 rounded p-1 text-[#4b6b60] opacity-0 hover:text-[#D85A30] group-hover:opacity-100"
                   aria-label="Delete chat"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
@@ -126,7 +126,7 @@ function ChatLayout() {
   );
 
   return (
-    <div className="flex h-screen w-full bg-[#F1EFE8]">
+    <div className="flex h-screen w-full bg-[#f5f0e0]">
       {/* Desktop sidebar */}
       <div className="hidden md:flex">{Sidebar}</div>
 
@@ -139,15 +139,15 @@ function ChatLayout() {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex items-center gap-2 border-b border-[#D3D1C7] bg-white px-3 py-2 md:hidden">
+        <div className="flex items-center gap-2 border-b border-[#e2d4a8] bg-white px-3 py-2 md:hidden">
           <button
             onClick={() => setMobileOpen(true)}
-            className="rounded p-1.5 text-[#2C2C2A]"
+            className="rounded p-1.5 text-[#064e3b]"
             aria-label="Open sidebar"
           >
             <Menu className="h-5 w-5" />
           </button>
-          <span className="text-sm font-semibold text-[#2C2C2A]">Chats</span>
+          <span className="text-sm font-semibold text-[#064e3b]">Chats</span>
         </div>
         <div className="min-h-0 flex-1">
           <Outlet />
