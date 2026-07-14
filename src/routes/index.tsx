@@ -87,9 +87,6 @@ function Landing() {
       <section className="px-6 py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <span className="mb-6 inline-block rounded-full border border-[#1e40af]/20 bg-[#3b82f6]/5 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-[#1e40af]">
-              Mentorship for Non-Tech Grads
-            </span>
             <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl" style={sora}>
               Your Personalised{" "}
               <span className="text-[#0d7a5f]">Tech Career</span> Mentorship
@@ -335,14 +332,9 @@ function Landing() {
       <section className="py-24">
         <div className="mx-auto max-w-5xl px-6">
           <div className="rounded-3xl border border-[#064e3b]/10 bg-white p-12 text-center shadow-2xl md:p-16">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#0d7a5f]">Free · No credit card</span>
-            <h2 className="mt-4 text-4xl font-bold md:text-5xl" style={sora}>
+            <h2 className="text-4xl font-bold md:text-5xl" style={sora}>
               Stop scrolling<br />Start moving
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-[#064e3b]/70">
-              Join non-tech graduates who have already made the switch. Your journey into the
-              future of work starts here.
-            </p>
             <div className="mt-10 flex justify-center">
               <Link
                 to="/survey"
