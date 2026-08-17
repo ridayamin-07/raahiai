@@ -135,6 +135,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AppProvider>
         <Outlet />
+        <NavArrows />
       </AppProvider>
     </QueryClientProvider>
   );
