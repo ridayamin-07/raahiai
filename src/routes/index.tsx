@@ -71,7 +71,7 @@ function Landing() {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Link to="/auth" className="text-sm font-semibold text-[#064e3b]/70 hover:text-[#064e3b]">Sign in</Link>
+              <Link to="/auth" search={{ redirect: undefined }} className="text-sm font-semibold text-[#064e3b]/70 hover:text-[#064e3b]">Sign in</Link>
               <Link
                 to="/survey"
                 className="rounded-lg bg-[#064e3b] px-5 py-2.5 text-sm font-semibold text-[#f5f0e0] shadow-sm transition hover:bg-[#0d7a5f]"
