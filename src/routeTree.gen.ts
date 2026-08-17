@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as RecommendationsRouteImport } from './routes/recommendations'
+import { Route as MySurveyRouteImport } from './routes/my-survey'
 import { Route as ChoiceRouteImport } from './routes/choice'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -33,6 +34,11 @@ const RoadmapRoute = RoadmapRouteImport.update({
 const RecommendationsRoute = RecommendationsRouteImport.update({
   id: '/recommendations',
   path: '/recommendations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MySurveyRoute = MySurveyRouteImport.update({
+  id: '/my-survey',
+  path: '/my-survey',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChoiceRoute = ChoiceRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/chat': typeof ChatRouteWithChildren
   '/choice': typeof ChoiceRoute
+  '/my-survey': typeof MySurveyRoute
   '/recommendations': typeof RecommendationsRoute
   '/roadmap': typeof RoadmapRoute
   '/survey': typeof SurveyRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/choice': typeof ChoiceRoute
+  '/my-survey': typeof MySurveyRoute
   '/recommendations': typeof RecommendationsRoute
   '/roadmap': typeof RoadmapRoute
   '/survey': typeof SurveyRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/chat': typeof ChatRouteWithChildren
   '/choice': typeof ChoiceRoute
+  '/my-survey': typeof MySurveyRoute
   '/recommendations': typeof RecommendationsRoute
   '/roadmap': typeof RoadmapRoute
   '/survey': typeof SurveyRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/chat'
     | '/choice'
+    | '/my-survey'
     | '/recommendations'
     | '/roadmap'
     | '/survey'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/choice'
+    | '/my-survey'
     | '/recommendations'
     | '/roadmap'
     | '/survey'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/chat'
     | '/choice'
+    | '/my-survey'
     | '/recommendations'
     | '/roadmap'
     | '/survey'
@@ -150,6 +162,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChatRoute: typeof ChatRouteWithChildren
   ChoiceRoute: typeof ChoiceRoute
+  MySurveyRoute: typeof MySurveyRoute
   RecommendationsRoute: typeof RecommendationsRoute
   RoadmapRoute: typeof RoadmapRoute
   SurveyRoute: typeof SurveyRoute
@@ -177,6 +190,13 @@ declare module '@tanstack/react-router' {
       path: '/recommendations'
       fullPath: '/recommendations'
       preLoaderRoute: typeof RecommendationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-survey': {
+      id: '/my-survey'
+      path: '/my-survey'
+      fullPath: '/my-survey'
+      preLoaderRoute: typeof MySurveyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/choice': {
@@ -248,6 +268,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChatRoute: ChatRouteWithChildren,
   ChoiceRoute: ChoiceRoute,
+  MySurveyRoute: MySurveyRoute,
   RecommendationsRoute: RecommendationsRoute,
   RoadmapRoute: RoadmapRoute,
   SurveyRoute: SurveyRoute,
