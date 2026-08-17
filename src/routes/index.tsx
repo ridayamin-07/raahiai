@@ -60,8 +60,10 @@ function Landing() {
             <button onClick={() => scrollTo("proof")} className="hover:text-[#064e3b]">Stories</button>
           </nav>
           {session ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <Link to="/my-survey" className="text-sm font-semibold text-[#064e3b]/70 hover:text-[#064e3b]">My survey</Link>
               <Link to="/roadmap" className="text-sm font-semibold text-[#0d7a5f] hover:underline">My roadmap</Link>
+
               <button
                 onClick={() => signOut()}
                 className="rounded-lg border border-[#064e3b]/20 bg-white px-4 py-2 text-sm font-semibold text-[#064e3b] hover:border-[#c9a84c]"
