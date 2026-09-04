@@ -10,6 +10,8 @@ Raahi.AI acts as a persistent AI mentor that:
 Adapts guidance to a user's actual background (tested against Sara, an IR-graduate persona)
 Remembers context across sessions instead of resetting every chat
 Walks users through career direction-setting in a way that assumes no prior technical vocabulary
+<img width="2585" height="2916" alt="1  Raahi AI Workflow" src="https://github.com/user-attachments/assets/8a636e75-1392-4bc8-9a7a-f95c4e12cfb3" />
+
 
 Tech Stack
 
