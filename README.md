@@ -4,7 +4,7 @@
 https://www.loom.com/share/e27576791fae4a8abd71eb6be484abfb
 
 
-**THE PROBLEM**
+→ **THE PROBLEM**
 
 Non-technical graduates who want to break into tech run into two compounding problems:
 
