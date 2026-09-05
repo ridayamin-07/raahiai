@@ -3,12 +3,14 @@
 **LOOM WALKTHROUGH**
 https://www.loom.com/share/e27576791fae4a8abd71eb6be484abfb
 
+
 **THE PROBLEM**
 
 Non-technical graduates who want to break into tech run into two compounding problems:
 
 1. They don't know where to begin.
 2. Once they start, they have no personalized mentorship to guide them from learning theory to becoming job-ready.
+
 
 **USER PERSONA - The Lost Ambitious**
 
@@ -18,11 +20,13 @@ Non-technical graduates who want to break into tech run into two compounding pro
 
 ***Core frustration*:** every resource either assumes prior knowledge, costs money they don't have, or gives advice too generic to act on.
 
+
 **THE SOLUTION - WHAT RAAHI DOES?**
 
 - Raahi is a personalized AI career mentorship platform that takes a non-technical user from confusion to clarity in one session: generating a career recommendation, a week-by-week roadmap, and an AI mentor that already knows who they are before they type a word.
 
 - Unlike generic tools that give the same advice to everyone, Raahi builds every output from the user's specific background, goals, constraints, and blockers, collected once through a 10-question survey and injected into every AI interaction that follows.
+
 
 **TECH STACK**
 
@@ -30,11 +34,13 @@ Non-technical graduates who want to break into tech run into two compounding pro
 - Supabase — auth + database
 - Lovable — no-code app layer / prompt-driven development
 
+
 **AI WORKFLOW**
 
 Three inputs enter the system: user profile, user message, and feature mode, and are assembled into one master prompt sent to Gemini. Two output types come back: structured JSON (rendered as UI) or prose (rendered as chat). State updates after every call, so each response is more contextual than the last.
 
 <img width="2585" height="2916" alt="1  Raahi AI Workflow" src="https://github.com/user-attachments/assets/153931a3-1120-4ff4-98dc-3b0a70bffc98" />
+
 
 **PROMPT ARCHITECTURE**
 
@@ -59,6 +65,7 @@ This problem cannot be solved with rules-based logic because
 - ***Stuck pattern detection*** across multiple weeks requires contextual memory and judgment recognising that two consecutive stuck weeks signal a pace problem, not just a task problem, is inference not logic
 - ***Language flexibility*** cannot be rules-based, matching register, tone, and language to whatever the user writes in requires natural language understanding, not conditional logic
 
+
 **DECISIONS WORTH KNOWING** 
 
 - ***Why I cut CV builder, portfolio, interview prep from v1***
@@ -73,7 +80,8 @@ This problem cannot be solved with rules-based logic because
     
     It demonstrates context awareness referencing the user's background, career path, and current week — breaking the generic AI feeling in the first sentence. And it creates a comfortable environment before any question is asked. A good mentor doesn't wait to be asked. They make it clear from the first moment that asking is safe.
 
-Early testing surfaced a critical gap: the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
+- **Early testing surfaced a critical gap:*8 the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
+
 
 **REAL USER TESTING**
 
@@ -84,30 +92,30 @@ One of the user sad:
 > And to be honest, it is a great initiative. I really liked it. It gave me a lot of clarity about which fields I can pursue in tech field.
 >
 
+
 **KEY LEARNINGS**
 
 1. Problem identification and problem definition are two different skills.
 2. A focused product is not a compromise. It is a better product.
 3. Metrics are not random. Every number is a deliberate choice.
 
+
 **FULL DOCUMENTATION**
 
 This repo covers the implementation. The full product thinking — problem framing, evals rubric, failure modes table, guardrails spec  lives here:
 
 PRD: https://lovely-asterisk-eb3.notion.site/Raahi-AI-PRD-3bf818c33dd380d6bab3d9e955fdd785?source=copy_link
+
 Case Study: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Case-Study-3bf818c33dd3802b90e1efa22a4f76fe?source=copy_link 
+
 Prompt Arcitecture: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Prompt-Archiecture-3bf818c33dd38017b394d0600f955723?source=copy_link 
+
 Failure Modes & Guardrails: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Failure-Modes-Guardrails-3bf818c33dd380ce8bc8fb540ff2b1da?source=copy_link
+
 Full Portfolio: https://lovely-asterisk-eb3.notion.site/Raahi-AI-AI-Tech-Career-Mentorship-Platform-c4f818c33dd382ea918d01aa6d2612a1?source=copy_link 
+
 
 **ABOUT THIS PROJECT**
 This project was built with Lovable (https://lovable.dev/dashboard).
 
 **Live app**: https://raahiai.lovable.app 
-
-
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
