@@ -44,19 +44,19 @@ Three inputs enter the system: user profile, user message, and feature mode, and
 
 ### **PROMPT ARCHITECTURE**
 
-***One master system prompt*** powers every feature: recommendations, roadmap, mentorship, check-ins, and stuck diagnosis. The architecture has three layers injected into every single API call:
+→ ***One master system prompt*** powers every feature: recommendations, roadmap, mentorship, check-ins, and stuck diagnosis. The architecture has three layers injected into every single API call:
 
 - **Identity layer:** Raahi's persona, tone rules, and hard constraints. Never changes regardless of feature or user.
 - **User context layer:** full profile injected dynamically: background, career path, current week, completed tasks, blockers, stuck streak. The AI always knows who it's talking to before the user types a word.
 - **Mode layer:** switches between recommendation, roadmap, mentorship, check-in, and stuck modes. Same brain, different behaviour.
 
-***Three deliberate prompt decisions:***
+→ ***Three deliberate prompt decisions:***
 
 - **JSON output format** for recommendations and roadmap enables dynamic UI rendering without parsing prose
 - **Survey-reference rule:** Every recommendation reason must name something from the user's actual answers, preventing generic output
 - **Language-match rule:** AI responds in whatever language the user writes in, delivering the language-flexibility promise at the model level not just the marketing level
 
-***Why AI ?***
+→ ***Why AI ?***
 
 This problem cannot be solved with rules-based logic because 
 
