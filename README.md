@@ -77,7 +77,12 @@ Early testing surfaced a critical gap: the app had no authentication or session 
 
 **REAL USER TESTING**
 
-Tested with 6 real users; 5 reported it was genuinely useful, citing the 'roadmap mode' as most valuable. 
+Conducted live user testing, 5 of 6 users found Raahi useful, citing the 'roadmap mode' as most valuable.
+
+One of the user sad:
+
+> And to be honest, it is a great initiative. I really liked it. It gave me a lot of clarity about which fields I can pursue in tech field.
+>
 
 **KEY LEARNINGS**
 
@@ -92,6 +97,7 @@ This repo covers the implementation. The full product thinking — problem frami
 PRD: https://lovely-asterisk-eb3.notion.site/Raahi-AI-PRD-3bf818c33dd380d6bab3d9e955fdd785?source=copy_link
 Case Study: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Case-Study-3bf818c33dd3802b90e1efa22a4f76fe?source=copy_link 
 Prompt Arcitecture: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Prompt-Archiecture-3bf818c33dd38017b394d0600f955723?source=copy_link 
+Failure Modes & Guardrails: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Failure-Modes-Guardrails-3bf818c33dd380ce8bc8fb540ff2b1da?source=copy_link
 Full Portfolio: https://lovely-asterisk-eb3.notion.site/Raahi-AI-AI-Tech-Career-Mentorship-Platform-c4f818c33dd382ea918d01aa6d2612a1?source=copy_link 
 
 **ABOUT THIS PROJECT**
@@ -99,19 +105,7 @@ This project was built with Lovable (https://lovable.dev/dashboard).
 
 **Live app**: https://raahiai.lovable.app 
 
-## Build with Lovable
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/1e3538e9-5f1a-4524-bbbb-dc8885c594f8).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
 git clone <this-repository-url>
 cd <repository-name>
 npm i
