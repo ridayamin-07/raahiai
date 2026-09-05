@@ -12,7 +12,7 @@ Non-technical graduates who want to break into tech run into two compounding pro
 2. Once they start, they have no personalized mentorship to guide them from learning theory to becoming job-ready.
 
 
-**USER PERSONA - The Lost Ambitious**
+→ **USER PERSONA - The Lost Ambitious**
 
 > ***Fresh graduate with a non-technical degree in South or Southeast Asia.***
 > 
@@ -21,28 +21,28 @@ Non-technical graduates who want to break into tech run into two compounding pro
 ***Core frustration*:** every resource either assumes prior knowledge, costs money they don't have, or gives advice too generic to act on.
 
 
-**THE SOLUTION - WHAT RAAHI DOES?**
+→ **THE SOLUTION - WHAT RAAHI DOES?**
 
 - Raahi is a personalized AI career mentorship platform that takes a non-technical user from confusion to clarity in one session: generating a career recommendation, a week-by-week roadmap, and an AI mentor that already knows who they are before they type a word.
 
 - Unlike generic tools that give the same advice to everyone, Raahi builds every output from the user's specific background, goals, constraints, and blockers, collected once through a 10-question survey and injected into every AI interaction that follows.
 
 
-**TECH STACK**
+→ **TECH STACK**
 
 - Gemini 2.5 Flash — core LLM
 - Supabase — auth + database
 - Lovable — no-code app layer / prompt-driven development
 
 
-**AI WORKFLOW**
+→ **AI WORKFLOW**
 
 Three inputs enter the system: user profile, user message, and feature mode, and are assembled into one master prompt sent to Gemini. Two output types come back: structured JSON (rendered as UI) or prose (rendered as chat). State updates after every call, so each response is more contextual than the last.
 
 <img width="2585" height="2916" alt="1  Raahi AI Workflow" src="https://github.com/user-attachments/assets/153931a3-1120-4ff4-98dc-3b0a70bffc98" />
 
 
-**PROMPT ARCHITECTURE**
+→ **PROMPT ARCHITECTURE**
 
 ***One master system prompt*** powers every feature: recommendations, roadmap, mentorship, check-ins, and stuck diagnosis. The architecture has three layers injected into every single API call:
 
@@ -66,7 +66,7 @@ This problem cannot be solved with rules-based logic because
 - ***Language flexibility*** cannot be rules-based, matching register, tone, and language to whatever the user writes in requires natural language understanding, not conditional logic
 
 
-**DECISIONS WORTH KNOWING** 
+→ **DECISIONS WORTH KNOWING** 
 
 - ***Why I cut CV builder, portfolio, interview prep from v1***
     
@@ -83,7 +83,7 @@ This problem cannot be solved with rules-based logic because
 - **Early testing surfaced a critical gap:** the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
 
 
-**REAL USER TESTING**
+→ **REAL USER TESTING**
 
 Conducted live user testing, 5 of 6 users found Raahi useful, citing the 'roadmap mode' as most valuable.
 
@@ -93,7 +93,7 @@ One of the user sad:
 >
 
 
-**KEY LEARNINGS**
+→ **KEY LEARNINGS**
 
 1. Problem identification and problem definition are two different skills.
 2. A focused product is not a compromise. It is a better product.
@@ -115,7 +115,7 @@ Failure Modes & Guardrails: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Fai
 Full Portfolio: https://lovely-asterisk-eb3.notion.site/Raahi-AI-AI-Tech-Career-Mentorship-Platform-c4f818c33dd382ea918d01aa6d2612a1?source=copy_link 
 
 
-**ABOUT THIS PROJECT**
+→ **ABOUT THIS PROJECT**
 This project was built with Lovable (https://lovable.dev/dashboard).
 
 **Live app**: https://raahiai.lovable.app 
