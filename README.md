@@ -80,7 +80,7 @@ This problem cannot be solved with rules-based logic because
     
     It demonstrates context awareness referencing the user's background, career path, and current week — breaking the generic AI feeling in the first sentence. And it creates a comfortable environment before any question is asked. A good mentor doesn't wait to be asked. They make it clear from the first moment that asking is safe.
 
-- **Early testing surfaced a critical gap:*8 the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
+- **Early testing surfaced a critical gap:** the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
 
 
 **REAL USER TESTING**
