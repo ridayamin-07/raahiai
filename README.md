@@ -1,34 +1,42 @@
-An AI-powered career mentorship platform that guides non-technical graduates from 'I don't know where to start' to personalized career recommendation, actionable roadmap, and an AI mentorship throughout the journey. 
-Watch 2-Minute Loom walkthrough: https://www.loom.com/share/e27576791fae4a8abd71eb6be484abfb 
+***An AI-powered career mentorship platform that guides non-technical graduates from 'I don't know where to start' to personalized career recommendation, actionable roadmap, and an AI mentorship throughout the journey.***
 
-The Problem
+**LOOM WALKTHROUGH**
+https://www.loom.com/share/e27576791fae4a8abd71eb6be484abfb
+
+**THE PROBLEM**
 
 Non-technical graduates who want to break into tech run into two compounding problems:
 
 1. They don't know where to begin.
 2. Once they start, they have no personalized mentorship to guide them from learning theory to becoming job-ready.
 
-User persona - "The Lost Ambitious": a fresh graduate with a non-technical degree in South or Southeast Asia. Core need: a clear, personalized starting point with ongoing guidance. Core frustration: every resource either assumes prior knowledge, costs money they don't have, or gives advice too generic to act on.
+**USER PERSONA - The Lost Ambitious**
 
-THE SOLUTION - WHAT RAAHI DOES?
+> ***Fresh graduate with a non-technical degree in South or Southeast Asia.***
+> 
+***Core need:*** a clear, personalised starting point into tech with ongoing guidance. 
 
-Raahi is a personalized AI career mentorship platform that takes a non-technical user from confusion to clarity in one session — generating a career recommendation, a week-by-week roadmap, and an AI mentor that already knows who they are before they type a word.
+***Core frustration*:** every resource either assumes prior knowledge, costs money they don't have, or gives advice too generic to act on.
 
-Unlike generic tools that give the same advice to everyone, Raahi builds every output from the user's specific background, goals, constraints, and blockers — collected once through a 10-question survey and injected into every AI interaction that follows.
+**THE SOLUTION - WHAT RAAHI DOES?**
 
-TECH STACK
+- Raahi is a personalized AI career mentorship platform that takes a non-technical user from confusion to clarity in one session: generating a career recommendation, a week-by-week roadmap, and an AI mentor that already knows who they are before they type a word.
 
-Gemini 2.5 Flash — core LLM
-Supabase — auth + database
-Lovable — no-code app layer / prompt-driven development
+- Unlike generic tools that give the same advice to everyone, Raahi builds every output from the user's specific background, goals, constraints, and blockers, collected once through a 10-question survey and injected into every AI interaction that follows.
 
-AI WORKFLOW
+**TECH STACK**
+
+- Gemini 2.5 Flash — core LLM
+- Supabase — auth + database
+- Lovable — no-code app layer / prompt-driven development
+
+**AI WORKFLOW**
 
 Three inputs enter the system: user profile, user message, and feature mode, and are assembled into one master prompt sent to Gemini. Two output types come back: structured JSON (rendered as UI) or prose (rendered as chat). State updates after every call, so each response is more contextual than the last.
 
 <img width="2585" height="2916" alt="1  Raahi AI Workflow" src="https://github.com/user-attachments/assets/153931a3-1120-4ff4-98dc-3b0a70bffc98" />
 
-PROMPT ARCHITECTURE
+**PROMPT ARCHITECTURE**
 
 ***One master system prompt*** powers every feature: recommendations, roadmap, mentorship, check-ins, and stuck diagnosis. The architecture has three layers injected into every single API call:
 
@@ -67,24 +75,29 @@ This problem cannot be solved with rules-based logic because
 
 Early testing surfaced a critical gap: the app had no authentication or session persistence, so every conversation started from zero. I implemented Supabase-based login and persistent cross-thread rolling context summaries (via Lovable prompt engineering) so the mentor actually "remembers" a user's situation across visits.
 
-Validation
+**REAL USER TESTING**
 
-Tested with 6 real users; 5 reported it was genuinely useful. Findings and the full evaluation approach are documented in the case study linked below.
+Tested with 6 real users; 5 reported it was genuinely useful, citing the 'roadmap mode' as most valuable. 
 
-Full Documentation
+**KEY LEARNINGS**
 
-This repo covers the implementation. The full product thinking — problem framing, evals rubric, failure modes table, guardrails spec, and a Mermaid diagram of the AI workflow — lives here:
+1. Problem identification and problem definition are two different skills.
+2. A focused product is not a compromise. It is a better product.
+3. Metrics are not random. Every number is a deliberate choice.
 
-📄 Case Study <!-- replace with your Notion/HTML link -->
-🎥 Loom Walkthrough <!-- replace with your Loom link -->
-📋 Full Portfolio <!-- replace with your portfolio hub link -->
-About This Project
+**FULL DOCUMENTATION**
 
-Built as part of a self-directed AI Product Management portfolio, applying a background in International Relations (systems thinking, empathy for non-obvious user contexts, cross-cultural communication) to AI product work.
+This repo covers the implementation. The full product thinking — problem framing, evals rubric, failure modes table, guardrails spec  lives here:
 
-This project was built with [Lovable](https://lovable.dev).
+PRD: https://lovely-asterisk-eb3.notion.site/Raahi-AI-PRD-3bf818c33dd380d6bab3d9e955fdd785?source=copy_link
+Case Study: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Case-Study-3bf818c33dd3802b90e1efa22a4f76fe?source=copy_link 
+Prompt Arcitecture: https://lovely-asterisk-eb3.notion.site/Raahi-AI-Prompt-Archiecture-3bf818c33dd38017b394d0600f955723?source=copy_link 
+Full Portfolio: https://lovely-asterisk-eb3.notion.site/Raahi-AI-AI-Tech-Career-Mentorship-Platform-c4f818c33dd382ea918d01aa6d2612a1?source=copy_link 
 
-**Live app**: https://raahiai.lovable.app
+**ABOUT THIS PROJECT**
+This project was built with Lovable (https://lovable.dev/dashboard).
+
+**Live app**: https://raahiai.lovable.app 
 
 ## Build with Lovable
 
