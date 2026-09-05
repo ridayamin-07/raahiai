@@ -1,3 +1,5 @@
+# **Raahi.AI - AI Tech Career Mentorship Platform**
+
 ***An AI-powered career mentorship platform that guides non-technical graduates from 'I don't know where to start' to personalized career recommendation, actionable roadmap, and an AI mentorship throughout the journey.***
 
 ### **LOOM WALKTHROUGH**
